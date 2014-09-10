@@ -18,9 +18,10 @@ iferr 2 stack
 iferr 3 exit 1
 login
 run
-Metacello new
-  baseline: 'GsUpgrader';
-  repository: 'filetree://${BASE}/repository';
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
@@ -44,10 +45,11 @@ iferr 2 stack
 iferr 3 exit 1
 login
 run
-Metacello new
-  baseline: 'GsUpgrader';
-  repository: 'filetree://${BASE}/repository';
-load.
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
@@ -73,10 +75,11 @@ iferr 2 stack
 iferr 3 exit 1
 login
 run
-Metacello new
-  baseline: 'GsUpgrader';
-    repository: 'filetree://${BASE}/repository';
-      load.
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 %
 
@@ -97,10 +100,11 @@ iferr 2 stack
 iferr 3 exit 1
 login
 run
-Metacello new
-  baseline: 'GsUpgrader';
-      repository: 'filetree://${BASE}/repository';
-            load.
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
 %
 

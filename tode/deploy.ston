@@ -1,0 +1,35 @@
+TDScriptLeafNode{#name:'deploy',#contents:'[ :topez :objIn :tokens :command :commandNode | 
+  | opts args |
+  \"for help: ./deploy -h\"
+  command
+    getOptsMixedLongShort:
+      {#(\'help\' $h #\'none\').
+      #(\'repo\' nil #\'required\')}
+    optionsAndArguments: [ :options :operands | 
+      opts := options.
+      args := operands ].
+  opts
+    at: \'help\'
+    ifAbsent: [ 
+      | mcTool wc sourceRepo |
+      mcTool := topez toolInstanceFor: \'mc\'.
+      wc := (mcTool mclist: \'GsUpgrader-Core\') first.
+      sourceRepo := (wc repositoryGroup repositories
+        reject: [ :each | each = MCCacheRepository default ]) first.
+      mcTool
+        mccopy: wc ancestry ancestorString
+        from: sourceRepo description
+        to: {(opts at: \'repo\')} ]
+    ifPresent: [ :ignored | 
+      TDManPage
+        viewManPage:
+          \'NAME
+  deploy - deploy sript utility template
+SYNOPSIS
+  deploy [-h|--help] --repo=<dest-repo>
+DESCRIPTION
+EXAMPLES
+  ./deploy --help
+  ./deploy --repo=server:///opt/git/gsUpgrader/monticello
+\'
+        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2014-09-10T15:29:02.1910119056701-07:00']}
