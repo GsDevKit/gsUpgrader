@@ -2,9 +2,9 @@ language: erlang
 
 env:
 
-#  - GS_VERSION=2.4.5.2
+  - GS_VERSION=2.4.5.2
 #  - GS_VERSION=3.1.0.6
-  - GS_VERSION=3.2.2
+#  - GS_VERSION=3.2.2
 
 before_script:
   - export BASE="$(pwd)"
