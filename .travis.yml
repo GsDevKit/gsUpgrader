@@ -2,7 +2,7 @@ language: erlang
 
 env:
 
-#  - GS_VERSION=2.4.5.2
+  - GS_VERSION=2.4.5.2
 #  - GS_VERSION=3.1.0.6
   - GS_VERSION=3.2.2
 
@@ -25,5 +25,5 @@ script:
   - bash createStone travis $GS_VERSION
 
     # GsUpdater
-  - bash $GS_HOME/tests/testGsUpgrader.sh
+  - bash tests/testGsUpgrader.sh
 
