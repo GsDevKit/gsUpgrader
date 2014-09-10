@@ -9,33 +9,6 @@ cd ${GS_HOME}/gemstone/stones/travis
 . defStone.env
 
 echo "=================================="
-echo "TESTING: upgradeGLASS, upgradeMetacello, upgradeGLASS1"
-echo "=================================="
-
-topaz -l -q -T50000 <<EOF
-iferr 1 stk
-iferr 2 stack
-iferr 3 exit 1
-login
-run
-Gofer new
-  package: 'GsUpgrader-Core';
-  repository: (MCDirectoryRepository new 
-                directory: (ServerFileDirectory on: '${BASE}/monticello'));
-  load.
-(Smalltalk at: #GsUpgrader) upgradeGLASS.
-(Smalltalk at: #GsUpgrader) upgradeMetacello.
-(Smalltalk at: #GsUpgrader) upgradeGLASS1.
-%
-
-exit 
-EOF
-
-stopStone travis
-stoneExtent travis
-startStone travis
-
-echo "=================================="
 echo "TESTING: upgradeGLASS, upgradeMetacello, upgradeGLASS1, upgradeGLASS, upgradeMetacello, upgradeGLASS1"
 echo "=================================="
 
@@ -53,6 +26,10 @@ Gofer new
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
+Transcript 
+  cr; show: '==================================';
+  cr; show: 'test re-upgrades';
+  cr; show: '=================================='.
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
