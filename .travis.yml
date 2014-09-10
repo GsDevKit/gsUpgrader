@@ -2,11 +2,12 @@ language: erlang
 
 env:
 
-  - GS_VERSION=2.4.5.2
-#  - GS_VERSION=3.1.0.6
+#  - GS_VERSION=2.4.5.2
+  - GS_VERSION=3.1.0.6
   - GS_VERSION=3.2.2
 
 before_script:
+  - export BASE="$(pwd)"
   - git clone --depth 1 https://github.com/GsDevKit/gsDevKitHome.git
   - cd gsDevKitHome
   - export GS_HOME="$(pwd)"
@@ -17,7 +18,7 @@ before_script:
   - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
   - sudo apt-get install -qq gcc-multilib libcurl3:i386 libstdc++6:i386
   - sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.6 /usr/lib/i386-linux-gnu/libstdc++.so
-  - cd ..
+  - cd $BASE
 
 script:
   - bash installGemStone $GS_VERSION

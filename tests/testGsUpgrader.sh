@@ -4,7 +4,7 @@ set -e # exit on error
 
 startStone travis
 
-cd ${GS_HOME}/gemstone/stones/travis
+cd ${BASE}/gemstone/stones/travis
 
 . defStone.env
 
@@ -20,7 +20,7 @@ login
 run
 Metacello new
   baseline: 'GsUpgrader';
-  repository: 'filetree://${GS_HOME}/repository';
+  repository: 'filetree://${BASE}/repository';
   load.
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
@@ -46,7 +46,7 @@ login
 run
 Metacello new
   baseline: 'GsUpgrader';
-  repository: 'filetree://${GS_HOME}/repository';
+  repository: 'filetree://${BASE}/repository';
 load.
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
@@ -75,7 +75,7 @@ login
 run
 Metacello new
   baseline: 'GsUpgrader';
-    repository: 'filetree://${GS_HOME}/repository';
+    repository: 'filetree://${BASE}/repository';
       load.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 %
@@ -99,7 +99,7 @@ login
 run
 Metacello new
   baseline: 'GsUpgrader';
-      repository: 'filetree://${GS_HOME}/repository';
+      repository: 'filetree://${BASE}/repository';
             load.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
 %
