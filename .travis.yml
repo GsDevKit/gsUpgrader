@@ -2,12 +2,12 @@ language: erlang
 
 env:
 
-  - GS_VERSION=2.4.5.2
-  - GS_VERSION=3.1.0.6
+#  - GS_VERSION=2.4.5.2
+#  - GS_VERSION=3.1.0.6
   - GS_VERSION=3.2.2
 
 before_script:
-  - git clone git@github.com:GsDevKit/gsDevKitHome.git
+  - git clone --depth 1 https://github.com/GsDevKit/gsUpgrader.git
   - cd gsDevKitHome
   - export GS_HOME="$(pwd)"
   - export PATH=$GS_HOME/bin:$PATH
