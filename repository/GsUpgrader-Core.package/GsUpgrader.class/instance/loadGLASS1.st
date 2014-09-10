@@ -2,7 +2,7 @@ loading
 loadGLASS1
   | metacello |
   self upgradeMetacello.
-  metacello := Metacello new
+  metacello := self metacelloClass new
     baseline: 'GLASS1';
     repository: self glass1RepositoryDescription;
     yourself.

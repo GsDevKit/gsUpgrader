@@ -2,7 +2,7 @@ upgrading
 upgradeMetacello
   | metacello projectSpec |
   self loadMetacelloPreview.
-  projectSpec := (Metacello image
+  projectSpec := (self metacelloClass image
     baseline: [ :spec | spec name = 'Metacello' ];
     list) first.
   projectSpec isLocked
@@ -15,9 +15,9 @@ upgradeMetacello
               'Metacello project repository is not in standard location ('
                 , self metacelloRepositoryDescription
                 , '). The upgrade of Metacello may not be complete.' ].
-      metacello := Metacello image baseline: 'Metacello' ]
+      metacello := self metacelloClass image baseline: 'Metacello' ]
     ifFalse: [ 
-      metacello := Metacello new
+      metacello := self metacelloClass new
         baseline: 'Metacello';
         repository: self metacelloRepositoryDescription;
         yourself ].

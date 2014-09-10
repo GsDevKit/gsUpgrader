@@ -1,6 +1,6 @@
 testing
 greaseLocked
-  (Metacello image
+  (self metacelloClass image
     baseline: [ :spec | spec name = 'Grease' ];
     list)
     do: [ :greaseSpec | 

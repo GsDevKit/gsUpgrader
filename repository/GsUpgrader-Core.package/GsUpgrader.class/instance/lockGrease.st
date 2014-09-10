@@ -3,7 +3,7 @@ lockGrease
   self greaseLocked
     ifTrue: [ ^ self ].
   self log: 'Locking Grease'.
-  Metacello new
+  self metacelloClass new
     baseline: 'Grease';
     repository: self greaseRepositoryDescription;
     lock

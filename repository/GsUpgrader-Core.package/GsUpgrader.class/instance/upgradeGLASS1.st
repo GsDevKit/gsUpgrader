@@ -7,7 +7,7 @@ upgradeGLASS1
       self glass1Present
         ifFalse: [ ^ self loadGLASS1 ] ].
   self upgradeMetacello.
-  projectSpec := (Metacello image
+  projectSpec := (self metacelloClass image
     baseline: [ :spec | spec name = 'GLASS1' ];
     list) first.
   projectSpec isLocked
@@ -20,9 +20,9 @@ upgradeGLASS1
               'GLASS1 project repository is not in standard location ('
                 , self glass1RepositoryDescription
                 , '). The upgrade of GLASS1 may not be complete.' ].
-      metacello := Metacello image baseline: 'GLASS1' ]
+      metacello := self metacelloClass image baseline: 'GLASS1' ]
     ifFalse: [ 
-      metacello := Metacello new
+      metacello := self metacelloClass new
         baseline: 'GLASS1';
         repository: self glass1RepositoryDescription;
         yourself ].
