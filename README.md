@@ -1,4 +1,4 @@
 gsUpgrader
 =========
 
-Utility class to perform upgrades for GLASS, GLASS1 and Metacello
+Utility class to perform upgrades for GLASS, GLASS1 and Metacello.
