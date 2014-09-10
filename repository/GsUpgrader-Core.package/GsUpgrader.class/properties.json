@@ -1,0 +1,14 @@
+{
+	"category" : "GsUpgrader-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "GsUpgrader",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

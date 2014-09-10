@@ -1,0 +1,29 @@
+language: erlang
+
+env:
+
+  - GS_VERSION=2.4.5.2
+  - GS_VERSION=3.1.0.6
+  - GS_VERSION=3.2.2
+
+before_script:
+  - git clone git@github.com:GsDevKit/gsDevKitHome.git
+  - cd gsDevKitHome
+  - export GS_HOME="$(pwd)"
+  - export PATH=$GS_HOME/bin:$PATH
+  - export GS_TRAVIS=true
+  - sudo apt-get update -qq
+  - sudo apt-get -y install libpam0g:i386
+  - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
+  - sudo apt-get install -qq gcc-multilib libcurl3:i386 libstdc++6:i386
+  - sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.6 /usr/lib/i386-linux-gnu/libstdc++.so
+  - cd ..
+
+script:
+  - bash installGemStone $GS_VERSION
+  - bash createTodeImage
+  - bash createStone travis $GS_VERSION
+
+    # GsUpdater
+  - bash $GS_HOME/tests/testGsUpgrader.sh
+

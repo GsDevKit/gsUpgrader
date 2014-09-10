@@ -1,0 +1,14 @@
+{
+	"category" : "BaselineOfGsUpgrader",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BaselineOfGsUpgrader",
+	"pools" : [
+		 ],
+	"super" : "BaselineOf",
+	"type" : "normal" }
