@@ -4,7 +4,7 @@ set -e # exit on error
 
 startStone travis
 
-cd ${BASE}/gemstone/stones/travis
+cd ${GS_HOME}/gemstone/stones/travis
 
 . defStone.env
 
