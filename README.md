@@ -26,13 +26,13 @@ The **GsUpgrader** class provides 4 different upgrade entry points:
 - [upgrade Metacello](#gsupgrader-classupgrademetacello)
 
 **Note**: *If you have locked one of the projects: GLASS1, Grease, or Metacello then the lock will be honored. 
-If you have locked one of the projects and the repository does not match the default repository location, then you will be responsible for handling the upgrade yourself. 
+If you have locked one of the projects and the repository does not match the default repository location, then you will be responsible for handling the upgrade yourself.*
 
 | project | dfault repository location |
 |---------|-------------------|
 | GLASS1  | github://glassdb/glass:master/repository |
 | Grease  | github://GsDevKit/Grease:master/repository |
-| Metacello | github://dalehenrich/metacello-work:master/repository |*
+| Metacello | github://dalehenrich/metacello-work:master/repository |
 
 ### GsUpgrader class>>upgradeGLASS
 
