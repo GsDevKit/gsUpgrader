@@ -3,7 +3,8 @@ gsUpgrader [![Build Status](https://travis-ci.org/GsDevKit/gsUpgrader.svg?branch
 
 Utility class to perform upgrades for GLASS, GLASS1 and Metacello.
 
-##Upgrading
+The current GLASS ecosystem is being converted from using the monticello-based repositories [GemSource](http://seaside.gemtalksystems.com/ss/) and [SS3](http://ss3.gemtalksystems.com/) to using the github-based repositories [glassdb](https://github.com/glassdb) and [GsDevKit](https://github.com/GsDevKit) and the **GsUgrader** class simplifies the upgrade process by encoding the sometimes complex steps into the clas. 
+
 
 ### GLASS1
 
@@ -33,9 +34,7 @@ Gofer new
 
 ## Why use GsUpgrader
 
-The current GLASS ecosystem is being converted from using the monticello-based repositories [GemSource](http://seaside.gemtalksystems.com/ss/) and [SS3](http://ss3.gemtalksystems.com/) to using the github-based repositories [glassdb](https://github.com/glassdb) and [GsDevKit](https://github.com/GsDevKit). 
-
-As part of the conversion we are converting from using **ConfigurationOfGLASS** to **BaselineOfGLASS1**, from **ConfigurationOfMetacello** to **BaselineOfMetacello** and from **ConfigurationOfGrease** to **BaselineOfGrease**. 
+We are converting from using **ConfigurationOfGLASS** to **BaselineOfGLASS1**, from **ConfigurationOfMetacello** to **BaselineOfMetacello** and from **ConfigurationOfGrease** to **BaselineOfGrease**. 
 
 To make a smooth conversion it is necessary to use the latest version of **Metacello**, but it can be difficult to use **Metacello** to upgrade itself, so the **GsUpgrader** class was created to provide a finer level of control and make sure that the upgrades are performed in the correct order.
 
