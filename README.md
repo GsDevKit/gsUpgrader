@@ -28,7 +28,7 @@ The **GsUpgrader** class provides 4 different upgrade entry points:
 **Note**: *If you have locked one of the projects: GLASS1, Grease, or Metacello then the lock will be honored. 
 If you have locked one of the projects and the repository does not match the default repository location, then you will be responsible for handling the upgrade yourself.*
 
-| project | dfault repository location |
+| project | default repository location |
 |---------|-------------------|
 | GLASS1  | github://glassdb/glass:master/repository |
 | Grease  | github://GsDevKit/Grease:master/repository |
@@ -60,15 +60,29 @@ Gofer new
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
 ```
 
-**upgradeGLASS1** will run **[upgradeGLASS](#gsupgrader-classupgradeglass)**, **[upgradeMetacello](#gsupgrader-classupgrademetacello)**, and **[upgradeGrease](#gsupgrader-classupgradegrease)** if necessary.
+**upgradeGLASS1** will run **[upgradeGLASS](#gsupgrader-classupgradeglass)** (if necessary), **[upgradeMetacello](#gsupgrader-classupgrademetacello)**, and **[upgradeGrease](#gsupgrader-classupgradegrease)**.
 
-**Note**: If you have locked the GLASS1 project and referenced a different repository than `github://glassdb/glass:master/repository`
+**Note**: *If you have locked the GLASS1 project and referenced a different repository than `github://glassdb/glass:master/repository`, you will be responsible for handling the upgrade yourself.*
 
 ### GsUpgrader class>>upgradeGrease
 
+**upgradeGrease** ensures that your image is upgraded to the latest version of [Grease](https://github.com/GsDevKit/Grease):
+
+```Smalltalk
+Gofer new
+  package: 'GsUpgrader-Core';
+  url: 'http://ss3.gemtalksystems.com/ss/gsUpgrader';
+  load.
+(Smalltalk at: #GsUpgrader) upgradeGrease.
+```
+
+**upgradeGrease** will run **[upgradeMetacello](#gsupgrader-classupgrademetacello)**, and lock the Grease project, using the default repository (`github://glassdb/glass:master/repository`).
+
+**Note**: *If you have locked the Grease project and referenced a different repository than `github://GsDevKit/Grease:master/repository`, you will be responsible for handling the upgrade yourself.*
+
 ### GsUpgrader class>>upgradeMetacello
 
-The most common usage pattern is to upgrade to the latest version of [Metacello](https://github.com/dalehenrich/metacello-work#install-preview-version). Metacello itself :
+**upgradeMetacello** ensures that your image is upgraded to the latest version of [Metacello](https://github.com/dalehenrich/metacello-work):
 
 ```Smalltalk
 Gofer new
@@ -77,4 +91,8 @@ Gofer new
   load.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 ```
+
+**upgradeMetacello** does not upgrade any other projects.
+
+**Note**: *If you have locked the Metacello project and referenced a different repository than `github://dalehenrich/metacello-work:master/repository`, you will be responsible for handling the upgrade yourself.*
 
