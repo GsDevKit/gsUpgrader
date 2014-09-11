@@ -1,0 +1,1 @@
+for more information see https://github.com/GsDevKit/gsUpgrader#gsupgrader-

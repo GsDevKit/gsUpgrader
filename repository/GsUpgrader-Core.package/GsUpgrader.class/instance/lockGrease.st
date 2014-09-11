@@ -3,7 +3,9 @@ lockGrease
   self greaseLocked
     ifTrue: [ ^ self ].
   self log: 'Locking Grease'.
-  self metacelloClass new
-    baseline: 'Grease';
-    repository: self greaseRepositoryDescription;
-    lock
+  GsDeployer
+    deploy: [ 
+      self metacelloClass new
+        baseline: 'Grease';
+        repository: self greaseRepositoryDescription;
+        lock ]
