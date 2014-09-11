@@ -20,22 +20,37 @@ The **GsUpgrader** class can be loaded into GLASS versions as old as [GLASS1.0-b
 
 The **GsUpgrader** class provides 4 different upgrade entry points: 
 
-- [upgrade GLASS](#gsupgrader-class>>upgradeglass) 
-- [upgrade GLASS1](#gsupgrader-class>>upgradeglass1)
-- [upgrade Grease](#gsupgrader-class>>upgradegrease)
-- [upgrade Metacello](#gsupgrader-class>>upgrademetacello)
+- [upgrade GLASS](#gsupgrader-classupgradeglass) 
+- [upgrade GLASS1](#gsupgrader-classupgradeglass1)
+- [upgrade Grease](#gsupgrader-classupgradegrease)
+- [upgrade Metacello](#gsupgrader-classupgrademetacello)
+
+**Note**: *If you have locked one of the projects: GLASS1, Grease, or Metacello then the lock will be honored. 
+If you have locked one of the projects and the repository does not match the default repository location, then you will be responsible for handling the upgrade yourself. 
+
+| project | dfault repository location |
+|---------|-------------------|
+| GLASS1  | github://glassdb/glass:master/repository |
+| Grease  | github://GsDevKit/Grease:master/repository |
+| Metacello | github://dalehenrich/metacello-work:master/repository |*
 
 ### GsUpgrader class>>upgradeGLASS
 
+**upgradeGLASS** ensures that your image is upgraded to GLASS1.0-beta.9.3:
+
 ```Smalltalk
-ConfigurationOfGLASS project updateProject.
-GsDeployer
-  deploy: [ (ConfigurationOfGLASS project version: '1.0-beta.9.3') load ].
+Gofer new
+  package: 'GsUpgrader-Core';
+  url: 'http://ss3.gemtalksystems.com/ss/gsUpgrader';
+  load.
+(Smalltalk at: #GsUpgrader) upgradeGLASS.
 ```
+
+If your image has already been upgrade to GLASS1.0-beta.9.3 or beyond, no changes will be made. so it is safe to use **upgradeGLASS** at any time.
 
 ### GsUpgrader class>>upgradeGLASS1
 
-The most common usage pattern is to upgrade to the latest version of [GLASS1](https://github.com/glassdb/glass#glass-):
+**upgradeGLASS1** ensures that your image is upgraded to the latest version of [GLASS1](https://github.com/glassdb):
 
 ```Smalltalk
 Gofer new
@@ -45,7 +60,9 @@ Gofer new
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
 ```
 
-The above expression has been tested with against GLASS versions as old as `1.0-beta.8.7.1`.
+**upgradeGLASS1** will run **[upgradeGLASS](#gsupgrader-classupgradeglass)**, **[upgradeMetacello](#gsupgrader-classupgrademetacello)**, and **[upgradeGrease](#gsupgrader-classupgradegrease)** if necessary.
+
+**Note**: If you have locked the GLASS1 project and referenced a different repository than `github://glassdb/glass:master/repository`
 
 ### GsUpgrader class>>upgradeGrease
 
