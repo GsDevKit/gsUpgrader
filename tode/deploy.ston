@@ -31,5 +31,6 @@ DESCRIPTION
 EXAMPLES
   ./deploy --help
   ./deploy --repo=server:///opt/git/gsUpgrader/monticello
+  ./deploy --repo=http://ss3.gemtalksystems.com/ss/gsUpgrader
 \'
-        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2014-09-10T15:29:02.1910119056701-07:00']}
+        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2014-09-10T16:37:50.8611249923706-07:00']}
