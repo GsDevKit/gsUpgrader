@@ -17,11 +17,23 @@ metacelloRegistrationReportOn: strm
         ifPresent: [ :registration :ignored | map at: registration baseName put: registration ] ].
   (map values sorted: [ :a :b | a baseName < b baseName ])
     do: [ :registration | 
-      strm nextPutAll: registration baseName , ' '.
+      | isLoaded isLocked |
+      isLocked := registration isLocked.
+      isLoaded := registration loadedInImage.
+      isLoaded
+        ifFalse: [ strm nextPutAll: '<' ].
+      isLocked
+        ifTrue: [ strm nextPutAll: '|' ].
+      strm nextPutAll: registration baseName.
+      isLocked
+        ifTrue: [ strm nextPutAll: '|' ].
+      strm space.
       (registration respondsTo: #'currentVersionString')
         ifTrue: [ 
           strm
             nextPutAll:
               registration currentVersionString , ' [' , registration currentBranchName , ']' ]
         ifFalse: [ strm nextPutAll: registration projectSpec versionString ].
+      isLoaded
+        ifFalse: [ strm nextPutAll: '>' ].
       strm cr ]
