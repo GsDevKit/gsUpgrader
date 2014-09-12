@@ -27,4 +27,4 @@ script:
 
     # GsUpdater
   - bash tests/testGsUpgrader.sh
-
+  - bash tests/runGLASS1Tests.sh

@@ -125,3 +125,4 @@ Gofer new
 exit 
 EOF
 
+stopStone travis
