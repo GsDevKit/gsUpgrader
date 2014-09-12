@@ -35,6 +35,10 @@ If you have locked one of the projects and the repository does not match the def
 | Grease  | github://GsDevKit/Grease:master/repository |
 | Metacello | github://dalehenrich/metacello-work:master/repository |
 
+---
+
+---
+
 ### GsUpgrader class>>upgradeGLASS
 
 **upgradeGLASS** ensures that your image is upgraded to GLASS1.0-beta.9.3:
@@ -48,6 +52,8 @@ Gofer new
 ```
 
 If your image has already been upgrade to GLASS1.0-beta.9.3 or beyond, no changes will be made. so it is safe to use **upgradeGLASS** at any time.
+
+---
 
 ### GsUpgrader class>>upgradeGLASS1
 
@@ -64,6 +70,8 @@ Gofer new
 **upgradeGLASS1** will run **[upgradeGLASS](#gsupgrader-classupgradeglass)** (if necessary), **[upgradeMetacello](#gsupgrader-classupgrademetacello)**, and **[upgradeGrease](#gsupgrader-classupgradegrease)**.
 
 **Note**: *If you have locked the GLASS1 project and referenced a different repository than `github://glassdb/glass:master/repository`, you will be responsible for handling the upgrade yourself.*
+
+---
 
 ### GsUpgrader class>>upgradeGrease
 
@@ -96,6 +104,8 @@ Gofer new
 **upgradeMetacello** does not upgrade any other projects.
 
 **Note**: *If you have locked the Metacello project and referenced a different repository than `github://dalehenrich/metacello-work:master/repository`, you will be responsible for handling the upgrade yourself.*
+
+---
 
 ### GsUpgrader class>>metacelloReport
 
@@ -184,3 +194,6 @@ Squeak-dkh.279
 System-Digital-Signatures-dkh.5
 Utf8Encoding.230-DaleHenrichs.23
 ```
+
+---
+
