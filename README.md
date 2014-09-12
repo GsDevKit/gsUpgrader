@@ -115,16 +115,16 @@ The **metacelloReport** method produces a report that looks like the following:
 ------------------------
 Metacello Version REPORT
 ------------------------
-1. ConfigurationOfGLASS	1.0-beta.8.7.1	#''release''
-2. ConfigurationOfGofer	1.0.5.1	#''release''
-3. ConfigurationOfGoferProjectLoader	1.0-alpha2.2	#''development''
-4. ConfigurationOfGrease	1.0.6.4	#''release''
-5. ConfigurationOfGsCore	0.245.1	#''release''
-6. ConfigurationOfGsMisc	0.240	#''release''
-7. ConfigurationOfGsMonticello	0.242	#''release''
-8. ConfigurationOfGsOB	0.242	#''release''
-9. ConfigurationOfGsSqueakCommon	0.9.2	#''release''
-10. ConfigurationOfMetacello	1.0-beta.31.1	#''release''
+1. ConfigurationOfGLASS	1.0-beta.8.7.1	#'release'
+2. ConfigurationOfGofer	1.0.5.1	#'release'
+3. ConfigurationOfGoferProjectLoader	1.0-alpha2.2	#'development'
+4. ConfigurationOfGrease	1.0.6.4	#'release'
+5. ConfigurationOfGsCore	0.245.1	#'release'
+6. ConfigurationOfGsMisc	0.240	#'release'
+7. ConfigurationOfGsMonticello	0.242	#'release'
+8. ConfigurationOfGsOB	0.242	#'release'
+9. ConfigurationOfGsSqueakCommon	0.9.2	#'release'
+10. ConfigurationOfMetacello	1.0-beta.31.1	#'release'
 --------------
 PACKAGE REPORT
 --------------
