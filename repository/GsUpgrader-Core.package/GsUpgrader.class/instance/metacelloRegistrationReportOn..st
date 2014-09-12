@@ -18,7 +18,7 @@ metacelloRegistrationReportOn: strm
   (map values sorted: [ :a :b | a baseName < b baseName ])
     do: [ :registration | 
       | isLoaded isLocked |
-      isLocked := registration isLocked.
+      isLocked := registration locked.
       isLoaded := registration loadedInImage.
       isLoaded
         ifFalse: [ strm nextPutAll: '<' ].
