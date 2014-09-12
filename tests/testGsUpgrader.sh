@@ -23,6 +23,7 @@ Gofer new
   repository: (MCDirectoryRepository new 
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
+%
 print
 (Smalltalk at: #GsUpgrader) metacelloReport
 %
