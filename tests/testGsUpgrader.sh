@@ -23,9 +23,15 @@ Gofer new
   repository: (MCDirectoryRepository new 
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
+run
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
+%
+run
 Transcript 
   cr; show: '==================================';
   cr; show: 'test re-upgrades';
@@ -33,6 +39,9 @@ Transcript
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
 %
 
 exit 
