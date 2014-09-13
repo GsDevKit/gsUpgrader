@@ -82,6 +82,11 @@ Gofer new
   repository: (MCDirectoryRepository new 
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
+run
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
 %
 print
@@ -108,6 +113,7 @@ EOF
 		stopStone travis
 		;;
 	"TEST_GREASE")
+		# NOTE - the tests for GREASE do not pass without loading GLASS1
 		stoneExtent travis
 		startStone travis
 		echo "=================================="
@@ -191,6 +197,11 @@ Gofer new
   repository: (MCDirectoryRepository new 
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
+run
 (Smalltalk at: #GsUpgrader) upgradeGrease.
 (Smalltalk at: #Metacello) image
   baseline: 'Grease';
