@@ -72,6 +72,9 @@ Gofer new
   load.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
 %
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
 # if there are defects, display the failures and set test failure flag
 level 1
 run
@@ -110,6 +113,9 @@ Gofer new
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
 (Smalltalk at: #GsUpgrader) upgradeGrease.
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
 %
 # if there are defects, display the failures and set test failure flag
 level 1
@@ -156,6 +162,9 @@ GsDeployer deploy: [
     onLock: [:ex | ex honor];
     load: #('CI') ].
 %
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
 # if there are defects, display the failures and set test failure flag
 level 1
 run
@@ -200,6 +209,9 @@ GsDeployer deploy: [
     repository: 'github://GsDevKit/Seaside31:v3.1.3-gs/repository';
     onLock: [:ex | ex honor];
     load: #('CI') ].
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
 %
 # if there are defects, display the failures and set test failure flag
 level 1
