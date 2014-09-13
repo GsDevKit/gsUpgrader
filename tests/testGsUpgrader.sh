@@ -5,7 +5,7 @@ set -e # exit on error
 cd ${GS_HOME}/gemstone/stones/travis
 . defStone.env
 
-# UPGRADE_TEST : ALL_UPGRADE, TEST_GLASS1, TEST_GREASE, TEST_SEASIDE312, TEST_SEASIDE313, UPGRADE_GLASS, UPGRADE_GLASS1, UPGRADE_METACELLO 
+# UPGRADE_TEST : ALL_UPGRADE, TEST_GLASS1, TEST_GREASE, TEST_GREASE_GLASS1, TEST_SEASIDE312, TEST_SEASIDE313, UPGRADE_GLASS, UPGRADE_GLASS1, UPGRADE_METACELLO 
 
 case "${UPGRADE_TEST}" in
 	"ALL_UPGRADE")
@@ -71,6 +71,12 @@ iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
 login
+# synchronize timezones
+run
+TimeZone default: TimeZone fromLinux
+%
+commit
+
 run
 Gofer new
   package: 'GsUpgrader-Core';
@@ -113,16 +119,74 @@ iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
 login
+# synchronize timezones
+run
+TimeZone default: TimeZone fromLinux
+%
+commit
+
 run
 Gofer new
   package: 'GsUpgrader-Core';
   repository: (MCDirectoryRepository new 
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
-(Smalltalk at: #GsUpgrader) upgradeGLASS1.
-Metacello image
+(Smalltalk at: #GsUpgrader) upgradeGrease.
+(Smalltalk at: #Metacello) image
   baseline: 'Grease';
-  loads: 'Tests'.
+  load: 'Tests'.
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
+# if there are defects, display the failures and set test failure flag
+level 1
+run
+| results defects |
+UserGlobals at: #TEST_FAILURE put: false. 
+results := TestCase suite run .
+(defects := results errors asArray, results unexpectedFailures asArray) isEmpty 
+  ifTrue: [ ^results printString ].
+UserGlobals at: #TEST_FAILURE put: true.
+defects := defects collect: [:each | each printString ].
+^defects
+%
+# if the test failure flag is set, throw an error and inform travis of the failure
+run
+TEST_FAILURE ifTrue: [nil error: 'test failures'].
+%
+exit 
+EOF
+		stopStone travis
+		;;
+	"TEST_GREASE_GLASS1")
+		stoneExtent travis
+		startStone travis
+		echo "=================================="
+		echo "TESTING: upgradeGLASS1 and install and run Grease tests"
+		echo "=================================="
+		topaz -l -q -T50000 <<EOF
+iferr 1 stk
+iferr 2 stack
+iferr 3 exit 1
+login
+# synchronize timezones
+run
+TimeZone default: TimeZone fromLinux
+%
+commit
+
+run
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
+(Smalltalk at: #GsUpgrader) upgradeGrease.
+(Smalltalk at: #Metacello) image
+  baseline: 'Grease';
+  load: 'Tests'.
+(Smalltalk at: #GsUpgrader) upgradeGLASS1
 %
 print
 (Smalltalk at: #GsUpgrader) metacelloReport
@@ -158,6 +222,12 @@ iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
 login
+# synchronize timezones
+run
+TimeZone default: TimeZone fromLinux
+%
+commit
+
 run
 Gofer new
   package: 'GsUpgrader-Core';
@@ -206,6 +276,12 @@ iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
 login
+# synchronize timezones
+run
+TimeZone default: TimeZone fromLinux
+%
+commit
+
 run
 Gofer new
   package: 'GsUpgrader-Core';
@@ -254,6 +330,12 @@ iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
 login
+# synchronize timezones
+run
+TimeZone default: TimeZone fromLinux
+%
+commit
+
 run
 Gofer new
   package: 'GsUpgrader-Core';
