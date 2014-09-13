@@ -117,6 +117,7 @@ EOF
 iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
+set user SystemUser p swordfish
 login
 
 # synchronize timezones
@@ -172,6 +173,7 @@ EOF
 iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
+set user SystemUser p swordfish
 login
 
 # synchronize timezones
@@ -228,6 +230,7 @@ EOF
 iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
+set user SystemUser p swordfish
 login
 
 # synchronize timezones
@@ -286,6 +289,7 @@ EOF
 iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
+set user SystemUser p swordfish
 login
 
 # synchronize timezones
