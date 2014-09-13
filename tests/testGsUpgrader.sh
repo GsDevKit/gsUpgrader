@@ -308,6 +308,34 @@ exit
 EOF
 		stopStone travis
 		;;
+	"UPGRADE_GREASE_GLASS1")
+		stoneExtent travis
+		startStone travis
+		echo "=================================="
+		echo "TESTING: upgradeGrease then upgradeGLASS1"
+		echo "=================================="
+		topaz -l -q -T50000 <<EOF
+iferr 1 stk
+iferr 2 stack
+iferr 3 exit 1
+login
+run
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
+(Smalltalk at: #GsUpgrader) upgradeGrease.
+(Smalltalk at: #GsUpgrader) upgradeGLASS1
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
+
+exit 
+EOF
+		stopStone travis
+		;;
 	"UPGRADE_METACELLO")
 		stoneExtent travis
 		startStone travis
