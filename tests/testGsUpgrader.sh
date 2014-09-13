@@ -18,17 +18,6 @@ case "${UPGRADE_TEST}" in
 iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
-set user SystemUser p swordfish
-login
-
-# synchronize timezones
-run
-TimeZone default: TimeZone fromLinux
-%
-commit
-logout
-
-set user DataCurator p swordfish
 login
 run
 Gofer new
