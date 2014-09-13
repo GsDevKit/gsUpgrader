@@ -19,6 +19,13 @@ iferr 1 stk
 iferr 2 stack
 iferr 3 exit 1
 login
+
+# synchronize timezones
+run
+TimeZone default: TimeZone fromLinux
+%
+commit
+
 run
 Gofer new
   package: 'GsUpgrader-Core';
