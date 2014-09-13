@@ -99,7 +99,7 @@ EOF
 		stoneExtent travis
 		startStone travis
 		echo "=================================="
-		echo "TESTING: upgradeGrease and run tests"
+		echo "TESTING: upgradeGLASS1 and install and run Grease tests"
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
@@ -112,7 +112,10 @@ Gofer new
   repository: (MCDirectoryRepository new 
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
-(Smalltalk at: #GsUpgrader) upgradeGrease.
+(Smalltalk at: #GsUpgrader) upgradeGLASS1.
+Metacello image
+  baseline: 'Grease';
+  loads: 'Tests'.
 %
 print
 (Smalltalk at: #GsUpgrader) metacelloReport
