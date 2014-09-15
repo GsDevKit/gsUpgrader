@@ -12,10 +12,6 @@ upgradeGLASS
       self inform: 'MetacelloPreview is loaded. Skipping GLASS upgrade.'.
       ^ self ].
   glassVersion := self projectVersion: 'ConfigurationOfGLASS'.
-  originalVersion := self projectVersion: 'ConfigurationOfMetacello'.
-  Transcript
-    cr;
-    show: glassVersion printString , ' ' , originalVersion printString.
   glassVersion versionNumber < '1.0-beta.9.3' asMetacelloVersionNumber
     ifTrue: [ 
       self log: 'Upgrading GLASS to 1.0-beta.9.3'.
@@ -27,13 +23,8 @@ upgradeGLASS
             load.
           glassVersion versionNumber < '1.0-beta.9.2' asMetacelloVersionNumber
             ifTrue: [ 
-              | metacelloVersion |
-              metacelloVersion := self
-                projectVersion: 'ConfigurationOfMetacello'.
-              Transcript
-                cr;
-                show: metacelloVersion printString.
-              metacelloVersion <= '1.0-beta.31.1' asMetacelloVersionNumber
+              (self projectVersion: 'ConfigurationOfMetacello') versionNumber
+                <= '1.0-beta.31.1' asMetacelloVersionNumber
                 ifTrue: [ 
                   "load basic Metacello packages for version 1.0-beta.31.1. 
                    To load GLASS 1.0-beta.8.7.1:
