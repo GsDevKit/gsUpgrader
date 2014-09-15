@@ -58,10 +58,10 @@ upgradeGLASS
                 do: [ :ex | 
                   self log: ex description.
                   ex resume ].
+              ((Smalltalk at: #'ConfigurationOfMetacello') project
+                version: #'previewBootstrap') load.
               ((Smalltalk at: #'ConfigurationOfGLASS') project
                 version: '1.0-beta.9.2') load: #('Core' 'Monticello').
-              ((Smalltalk at: #'ConfigurationOfGLASS') project
-                version: '1.0-beta.9.2') load: #('Metacello').
               ((Smalltalk at: #'ConfigurationOfGLASS') project
                 version: '1.0-beta.9.2') load ]
                 on: (Smalltalk at: #'MetacelloSkipDirtyPackageLoad')
