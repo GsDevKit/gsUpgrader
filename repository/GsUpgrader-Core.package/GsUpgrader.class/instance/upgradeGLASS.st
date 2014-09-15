@@ -32,13 +32,13 @@ upgradeGLASS
 	                  - MetacelloSkipDirtyPackageLoad needs to be defined"
                   self log: 'Bootstrapping Metacello1.0-beta.31.1'.
                   (Smalltalk at: #'Gofer') new
-                    gemsource: 'metacello';
+                    url: 'http://seaside.gemtalksystems.com/ss/metacello';
                     version: 'Metacello-Base-DaleHenrichs.19';
                     version: 'Metacello-Core-dkh.468';
                     version: 'Metacello-MC-dkh.531';
                     load.
                   (Smalltalk at: #'Gofer') new
-                    gemsource: 'metacello';
+                    url: 'http://seaside.gemtalksystems.com/ss/metacello';
                     version: 'Metacello-Platform.gemstone-dkh.23';
                     load ].
               [ 
