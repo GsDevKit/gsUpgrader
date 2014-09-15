@@ -15,7 +15,7 @@ upgradeGLASS
   glassVersion versionNumber < '1.0-beta.9.3' asMetacelloVersionNumber
     ifTrue: [ 
       self log: 'Upgrading GLASS to 1.0-beta.9.3'.
-      GsDeployer
+      self
         deploy: [ 
           Gofer new
             package: 'ConfigurationOfGLASS';

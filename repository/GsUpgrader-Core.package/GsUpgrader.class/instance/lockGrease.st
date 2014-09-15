@@ -3,7 +3,7 @@ lockGrease
   self greaseLocked
     ifTrue: [ ^ self ].
   self log: 'Locking Grease'.
-  GsDeployer
+  self
     deploy: [ 
       self metacelloClass new
         baseline: 'Grease';

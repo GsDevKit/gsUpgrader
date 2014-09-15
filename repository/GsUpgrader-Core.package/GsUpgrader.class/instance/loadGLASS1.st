@@ -6,7 +6,7 @@ loadGLASS1
     baseline: 'GLASS1';
     repository: self glass1RepositoryDescription;
     yourself.
-  GsDeployer
+  self
     deploy: [ 
       self log: 'Installing GLASS1'.
       metacello copy get.

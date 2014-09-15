@@ -6,7 +6,7 @@ loadGreaseBaseline
     baseline: 'Grease';
     repository: self greaseRepositoryDescription;
     yourself.
-  GsDeployer
+  self
     deploy: [ 
       self log: 'Installing Grease'.
       metacello copy get.

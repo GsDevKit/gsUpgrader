@@ -20,7 +20,7 @@ standardUpgrade: projectName repository: repositoryDescription
         baseline: projectName;
         repository: repositoryDescription;
         yourself ].
-  GsDeployer
+  self
     deploy: [ 
       self log: 'Upgrading ' , projectName.
       metacello copy get.

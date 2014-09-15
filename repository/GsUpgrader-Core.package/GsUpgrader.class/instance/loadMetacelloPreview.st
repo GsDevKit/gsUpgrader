@@ -11,7 +11,7 @@ loadMetacelloPreview
     gemsource: 'metacello';
     package: 'ConfigurationOfMetacello';
     load.
-  GsDeployer
+  self
     deploy: [ 
       "load the Metacello Preview"
       ((Smalltalk at: #'ConfigurationOfMetacello') project
