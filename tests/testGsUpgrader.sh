@@ -16,7 +16,6 @@ case "${UPGRADE_TEST}" in
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 login
 run
@@ -61,7 +60,6 @@ EOF
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 set user SystemUser p swordfish
 login
@@ -121,7 +119,6 @@ EOF
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 set user SystemUser p swordfish
 login
@@ -177,7 +174,6 @@ EOF
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 set user SystemUser p swordfish
 login
@@ -239,7 +235,6 @@ EOF
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 set user SystemUser p swordfish
 login
@@ -298,7 +293,6 @@ EOF
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 set user SystemUser p swordfish
 login
@@ -357,7 +351,6 @@ EOF
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 login
 run
@@ -381,7 +374,6 @@ EOF
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 login
 run
@@ -405,7 +397,6 @@ EOF
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 login
 run
@@ -429,7 +420,6 @@ EOF
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 login
 run
@@ -457,7 +447,6 @@ EOF
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
-iferr 2 stack
 iferr 3 exit 1
 login
 run
