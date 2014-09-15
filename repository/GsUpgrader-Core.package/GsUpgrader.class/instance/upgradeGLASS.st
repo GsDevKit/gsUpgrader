@@ -24,7 +24,25 @@ upgradeGLASS
           glassVersion versionNumber < '1.0-beta.9.2' asMetacelloVersionNumber
             ifTrue: [ 
               [ 
-              ((Smalltalk at: #'ConfigurationOfGLASS') project version: '1.0-beta.9.2')
+              (Smalltalk at: #'ConfigurationOfMetacello') project version
+                <= '1.0-beta.31.1' asMetacelloVersionNumber
+                ifTrue: [ 
+                  "load basic Metacello packages for version 1.0-beta.31.1. 
+                   To load GLASS 1.0-beta.8.7.1:
+	                  - Metacello must handle symbolic versions
+	                  - MetacelloSkipDirtyPackageLoad needs to be defined"
+                  (Smalltalk at: #'Gofer') new
+                    gemsource: 'metacello';
+                    version: 'Metacello-Base-DaleHenrichs.19';
+                    version: 'Metacello-Core-dkh.468';
+                    version: 'Metacello-MC-dkh.531';
+                    load.
+                  (Smalltalk at: #'Gofer') new
+                    gemsource: 'metacello';
+                    version: 'Metacello-Platform.gemstone-dkh.23';
+                    load ].
+              ((Smalltalk at: #'ConfigurationOfGLASS') project
+                version: '1.0-beta.9.2')
                 load: #('Core' 'Monticello' 'Gofer Project Loader').
               ((Smalltalk at: #'ConfigurationOfGLASS') project
                 version: '1.0-beta.9.2') load ]
