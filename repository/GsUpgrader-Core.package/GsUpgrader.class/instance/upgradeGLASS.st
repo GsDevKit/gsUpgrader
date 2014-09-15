@@ -2,7 +2,7 @@ upgrading
 upgradeGLASS
   "skip this step if GLASS1 is already loaded"
 
-  | glassVersion |
+  | glassVersion originalVersion |
   self glass1Loaded
     ifTrue: [ 
       self inform: 'GLASS1 is loaded. Skipping GLASS upgrade.'.
@@ -12,6 +12,7 @@ upgradeGLASS
     ifTrue: [ 
       self inform: 'MetacelloPreview is loaded. Skipping GLASS upgrade.'.
       ^ self ].
+  originalVersion := self projectVersion: 'ConfigurationOfMetacello'.
   glassVersion versionNumber < '1.0-beta.9.3' asMetacelloVersionNumber
     ifTrue: [ 
       self log: 'Upgrading GLASS to 1.0-beta.9.3'.
@@ -23,7 +24,9 @@ upgradeGLASS
             load.
           glassVersion versionNumber < '1.0-beta.9.2' asMetacelloVersionNumber
             ifTrue: [ 
-              (self projectVersion: 'ConfigurationOfMetacello')
+              | metacelloVersion |
+              (metacelloVersion := self
+                projectVersion: 'ConfigurationOfMetacello')
                 <= '1.0-beta.31.1' asMetacelloVersionNumber
                 ifTrue: [ 
                   "load basic Metacello packages for version 1.0-beta.31.1. 
