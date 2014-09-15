@@ -255,10 +255,12 @@ Gofer new
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
 (Smalltalk at: #GsUpgrader) upgradeGrease.
+%
+run
 GsDeployer deploy: [
   Metacello new
     baseline: 'Seaside3';
-    repository: 'github://GsDevKit/Seaside31:master/repository';
+    repository: 'github://GsDevKit/Seaside31:gs_master/repository';
     onLock: [:ex | ex honor];
     load: #('CI') ].
 %
@@ -312,7 +314,9 @@ Gofer new
   repository: (MCDirectoryRepository new 
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
-(Smalltalk at: #GsUpgrader) upgradeMetacello.
+(Smalltalk at: #GsUpgrader) upgradeGrease
+%
+run
 GsDeployer deploy: [
   Metacello new
     baseline: 'ZincHTTPComponents';
