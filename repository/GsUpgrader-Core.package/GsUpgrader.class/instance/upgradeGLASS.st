@@ -23,7 +23,7 @@ upgradeGLASS
             load.
           glassVersion versionNumber < '1.0-beta.9.2' asMetacelloVersionNumber
             ifTrue: [ 
-              (Smalltalk at: #'ConfigurationOfMetacello') project currentVersion
+              (self projectVersion: 'ConfigurationOfMetacello')
                 <= '1.0-beta.31.1' asMetacelloVersionNumber
                 ifTrue: [ 
                   "load basic Metacello packages for version 1.0-beta.31.1. 
