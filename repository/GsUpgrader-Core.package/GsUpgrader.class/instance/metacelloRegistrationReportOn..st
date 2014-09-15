@@ -15,7 +15,7 @@ metacelloRegistrationReportOn: strm
         registrationForProjectSpec: projectSpec
         ifAbsent: [ self error: 'registration for projectSpec: ' projectSpec name , ' not found' ]
         ifPresent: [ :registration :ignored | map at: registration baseName put: registration ] ].
-  (map values sorted: [ :a :b | a baseName < b baseName ])
+  (map values sortWithBlock: [ :a :b | a baseName < b baseName ])
     do: [ :registration | 
       | isLoaded isLocked |
       isLocked := registration locked.

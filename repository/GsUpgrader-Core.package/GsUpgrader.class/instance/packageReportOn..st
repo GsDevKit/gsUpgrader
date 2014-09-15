@@ -7,7 +7,8 @@ packageReportOn: strm
     cr;
     nextPutAll: '--------------';
     cr.
-  (MCWorkingCopy allManagers sorted: [ :a :b | a packageName < b packageName ])
+  (MCWorkingCopy allManagers
+    sortWithBlock: [ :a :b | a packageName < b packageName ])
     do: [ :wc | 
       strm
         nextPutAll: wc ancestry ancestorString;
