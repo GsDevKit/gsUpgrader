@@ -23,7 +23,6 @@ upgradeGLASS
             load.
           glassVersion versionNumber < '1.0-beta.9.2' asMetacelloVersionNumber
             ifTrue: [ 
-              [ 
               (Smalltalk at: #'ConfigurationOfMetacello') project version
                 <= '1.0-beta.31.1' asMetacelloVersionNumber
                 ifTrue: [ 
@@ -42,8 +41,8 @@ upgradeGLASS
                     gemsource: 'metacello';
                     version: 'Metacello-Platform.gemstone-dkh.23';
                     load ].
-              ((Smalltalk at: #'ConfigurationOfGLASS') project
-                version: '1.0-beta.9.2')
+              [ 
+              ((Smalltalk at: #'ConfigurationOfGLASS') project version: '1.0-beta.9.2')
                 load: #('Core' 'Monticello' 'Gofer Project Loader').
               ((Smalltalk at: #'ConfigurationOfGLASS') project
                 version: '1.0-beta.9.2') load ]
