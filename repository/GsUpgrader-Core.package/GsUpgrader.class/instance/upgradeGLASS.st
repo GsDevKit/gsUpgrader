@@ -31,6 +31,7 @@ upgradeGLASS
                    To load GLASS 1.0-beta.8.7.1:
 	                  - Metacello must handle symbolic versions
 	                  - MetacelloSkipDirtyPackageLoad needs to be defined"
+                  self log: 'Bootstrapping Metacello1.0-beta.31.1'.
                   (Smalltalk at: #'Gofer') new
                     gemsource: 'metacello';
                     version: 'Metacello-Base-DaleHenrichs.19';
@@ -46,7 +47,7 @@ upgradeGLASS
                 load: #('Core' 'Monticello' 'Gofer Project Loader').
               ((Smalltalk at: #'ConfigurationOfGLASS') project
                 version: '1.0-beta.9.2') load ]
-                on: MetacelloSkipDirtyPackageLoad
+                on: (Smalltalk at: #'MetacelloSkipDirtyPackageLoad')
                 do: [ :ex | ex resume: false ] ].
           ((Smalltalk at: #'ConfigurationOfGLASS') project
             version: '1.0-beta.9.3') load ] ]
