@@ -16,7 +16,7 @@ Gofer new
   load.
 ```
 
-The **GsUpgrader** class can be loaded into GLASS versions as old as [GLASS1.0-beta.8.7.1](http://gemstonesoup.wordpress.com/2011/11/21/glass-1-0-beta-8-7-1-released/).
+The **GsUpgrader** class can be loaded into GLASS versions as old as GLASS1.0-beta.8.1 (GemStone 2.4.4.1).
 
 The **GsUpgrader** class provides 4 different upgrade entry points and a diagnostic entry point: 
 
