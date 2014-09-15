@@ -42,8 +42,26 @@ upgradeGLASS
                     version: 'Metacello-Platform.gemstone-dkh.23';
                     load ].
               [ 
-              ((Smalltalk at: #'ConfigurationOfGLASS') project version: '1.0-beta.9.2')
-                load: #('Core' 'Monticello' 'Gofer Project Loader').
+              [ 
+              Gofer new
+                gemsource: 'MetacelloRepository';
+                package: 'ConfigurationOfMetacello';
+                package: 'ConfigurationOfGofer';
+                package: 'ConfigurationOfGsCore';
+                package: 'ConfigurationOfGoferProjectLoader';
+                package: 'ConfigurationOfGsMonticello';
+                package: 'ConfigurationOfGsOB';
+                package: 'ConfigurationOfGsMisc';
+                package: 'ConfigurationOfGsSqueakCommon';
+                load ]
+                on: Warning
+                do: [ :ex | 
+                  self log: ex description.
+                  ex resume ].
+              ((Smalltalk at: #'ConfigurationOfGLASS') project
+                version: '1.0-beta.9.2') load: #('Core' 'Monticello').
+              ((Smalltalk at: #'ConfigurationOfGLASS') project
+                version: '1.0-beta.9.2') load: #('Metacello').
               ((Smalltalk at: #'ConfigurationOfGLASS') project
                 version: '1.0-beta.9.2') load ]
                 on: (Smalltalk at: #'MetacelloSkipDirtyPackageLoad')
