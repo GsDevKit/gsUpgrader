@@ -7,12 +7,15 @@ upgradeGLASS
     ifTrue: [ 
       self inform: 'GLASS1 is loaded. Skipping GLASS upgrade.'.
       ^ self ].
-  glassVersion := ConfigurationOfGLASS project currentVersion.
   self metacelloPreviewLoaded
     ifTrue: [ 
       self inform: 'MetacelloPreview is loaded. Skipping GLASS upgrade.'.
       ^ self ].
+  glassVersion := self projectVersion: 'ConfigurationOfGLASS'.
   originalVersion := self projectVersion: 'ConfigurationOfMetacello'.
+  Transcript
+    cr;
+    show: glassVersion printString , ' ' , originalVersion printString.
   glassVersion versionNumber < '1.0-beta.9.3' asMetacelloVersionNumber
     ifTrue: [ 
       self log: 'Upgrading GLASS to 1.0-beta.9.3'.
