@@ -84,7 +84,7 @@ Gofer new
   load.
 %
 run
-(Smalltalk at: #GsUpgrader) upgradeMetacello
+(Smalltalk at: #GsUpgrader) upgradeMetacello.
 Metacello new
   baseline: 'FileTree';
   repository: 'github://dalehenrich/filetree:gemstone2.4/repository';

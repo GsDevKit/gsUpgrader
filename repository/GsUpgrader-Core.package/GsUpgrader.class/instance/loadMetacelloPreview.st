@@ -6,9 +6,11 @@ loadMetacelloPreview
     ifTrue: [ 
       self log: 'Metacello Preview already loaded'.
       ^ self ].
+  self metacelloBootstrap10beta311Loaded
+    ifFalse: [ self loadMetacelloBootstrap10beta311 ].
   self log: 'Loading Metacello Preview'.
   Gofer new
-    gemsource: 'metacello';
+    url: 'http://seaside.gemtalksystems.com/ss/metacello';
     package: 'ConfigurationOfMetacello';
     load.
   self
