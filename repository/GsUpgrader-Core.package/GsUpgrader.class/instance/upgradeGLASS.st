@@ -28,7 +28,7 @@ upgradeGLASS
               [ 
               [ 
               Gofer new
-                gemsource: 'MetacelloRepository';
+                url: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository';
                 package: 'ConfigurationOfMetacello';
                 package: 'ConfigurationOfGofer';
                 package: 'ConfigurationOfGsCore';
