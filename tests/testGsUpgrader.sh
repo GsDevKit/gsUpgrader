@@ -89,6 +89,7 @@ Metacello new
   baseline: 'FileTree';
   repository: 'github://dalehenrich/filetree:gemstone2.4/repository';
   load: 'Tests'.
+(Smalltalk at: #GsUpgrader) upgradeGLASS1.
 %
 print
 (Smalltalk at: #GsUpgrader) metacelloReport
