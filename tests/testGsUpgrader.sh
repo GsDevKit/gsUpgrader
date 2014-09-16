@@ -82,9 +82,9 @@ Gofer new
   repository: (MCDirectoryRepository new 
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
+(Smalltalk at: #GsUpgrader) upgradeMetacello.
 %
 run
-(Smalltalk at: #GsUpgrader) upgradeMetacello.
 Metacello new
   baseline: 'FileTree';
   repository: 'github://dalehenrich/filetree:gemstone2.4/repository';
