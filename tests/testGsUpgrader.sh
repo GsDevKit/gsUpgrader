@@ -136,7 +136,7 @@ run
 Gofer new
   package: 'ConfigurationOfGrease';
   url: 'http://smalltalkhub.com/mc/Seaside/MetacelloConfigurations/main';
-  load: #('Grease-Core'.
+  load: #('Grease-Core').
   ((Smalltalk at: #ConfigurationOfGrease) project version: #stable) load.
 %
 run
