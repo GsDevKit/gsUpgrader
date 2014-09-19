@@ -136,8 +136,8 @@ run
 Gofer new
   package: 'ConfigurationOfGrease';
   url: 'http://smalltalkhub.com/mc/Seaside/MetacelloConfigurations/main';
-  load: #('Grease-Core').
-  ((Smalltalk at: #ConfigurationOfGrease) project version: #stable) load.
+  load.
+  ((Smalltalk at: #ConfigurationOfGrease) project version: #stable) load: #('Grease-Core').
 %
 run
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
