@@ -114,6 +114,38 @@ exit
 EOF
 		stopStone travis
 		;;
+	"TEST_ISSUE_3")
+		stoneExtent travis
+		startStone travis
+		echo "=================================="
+		echo "TESTING: Issue #3"
+		echo "=================================="
+		topaz -l -q -T50000 <<EOF
+iferr 1 stk
+iferr 3 exit 1
+login
+
+run
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
+%
+run
+Gofer new
+  package: 'ConfigurationOfGrease';
+  url: 'http://smalltalkhub.com/mc/Seaside/MetacelloConfigurations/main';
+  load: #('Grease-Core'.
+  ((Smalltalk at: #ConfigurationOfGrease) project version: #stable) load.
+%
+run
+(Smalltalk at: #GsUpgrader) upgradeGLASS1.
+%
+exit 
+EOF
+		stopStone travis
+		;;
 	"TEST_GLASS1")
 		stoneExtent travis
 		startStone travis
