@@ -141,7 +141,14 @@ Gofer new
 run
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
+(Smalltalk at: #GsUpgrader) upgradeGLASS1.
 ((Smalltalk at: #ConfigurationOfGrease) project version: #stable) load: #('Grease-Core').
+%
+run
+Metacello new
+  baseline: 'Grease';
+  repository: 'github://GsDevKit/Grease:master/repository';
+  get.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
 %
 exit 
