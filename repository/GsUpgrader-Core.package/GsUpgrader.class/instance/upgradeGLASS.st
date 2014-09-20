@@ -51,5 +51,13 @@ upgradeGLASS
                 on: (Smalltalk at: #'MetacelloSkipDirtyPackageLoad')
                 do: [ :ex | ex resume: false ] ].
           ((Smalltalk at: #'ConfigurationOfGLASS') project
-            version: '1.0-beta.9.3') load ] ]
+            version: '1.0-beta.9.3') load.
+          #('GsCore' 'GsMonticello' 'GsOB' 'GsMisc')
+            do: [ :gsProjectName | 
+              "Patch registrations with proper repository"
+              Metacello image
+                configuration: gsProjectName;
+                repository:
+                    'http://seaside.gemtalksystems.com/ss/MetacelloRepository';
+                register ] ] ]
     ifFalse: [ self log: 'GLASS already upgraded to 1.0-beta.9.3' ]
