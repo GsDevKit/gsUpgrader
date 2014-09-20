@@ -131,24 +131,19 @@ Gofer new
   repository: (MCDirectoryRepository new 
                  directory: (ServerFileDirectory on: '${BASE}/monticello'));
   load.
-%
-run
 Gofer new
   package: 'ConfigurationOfGrease';
   url: 'http://smalltalkhub.com/mc/Seaside/MetacelloConfigurations/main';
   load.
-%
-run
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
-(Smalltalk at: #GsUpgrader) upgradeGLASS1.
-((Smalltalk at: #ConfigurationOfGrease) project version: #stable) load: #('Grease-Core').
 %
 run
+Transcript cr; show: '++++Loading Grease configuration'.
 Metacello new
-  baseline: 'Grease';
-  repository: 'github://GsDevKit/Grease:master/repository';
-  get.
+  configuration: 'Grease';
+  repository: 'http://smalltalkhub.com/mc/Seaside/MetacelloConfigurations/main';
+  load.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
 %
 exit 
