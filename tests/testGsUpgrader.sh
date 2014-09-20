@@ -140,6 +140,7 @@ Gofer new
 %
 run
 (Smalltalk at: #GsUpgrader) upgradeGLASS.
+(Smalltalk at: #GsUpgrader) upgradeMetacello.
 ((Smalltalk at: #ConfigurationOfGrease) project version: #stable) load: #('Grease-Core').
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
 %
