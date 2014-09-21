@@ -142,6 +142,7 @@ run
 Transcript cr; show: '++++Loading Grease configuration'.
 Metacello new
   configuration: 'Grease';
+  version: #'release1.0';
   repository: 'http://smalltalkhub.com/mc/Seaside/MetacelloConfigurations/main';
   load.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
