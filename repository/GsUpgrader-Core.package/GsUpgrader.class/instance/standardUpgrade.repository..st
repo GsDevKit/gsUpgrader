@@ -1,10 +1,12 @@
 private
 standardUpgrade: projectName repository: repositoryDescription
-  | projectSpec metacello |
-  projectSpec := (self metacelloClass image
+  | specs projectSpec metacello |
+  specs := self metacelloClass image
     baseline: [ :spec | spec name = projectName ];
-    list) first.
-  projectSpec isLocked
+    list.
+  specs isEmpty
+    ifFalse: [ projectSpec := specs first ].
+  (projectSpec notNil and: [ projectSpec isLocked ])
     ifTrue: [ 
       projectSpec repositorySpecs
         detect: [ :repoSpec | repoSpec description = repositoryDescription ]
