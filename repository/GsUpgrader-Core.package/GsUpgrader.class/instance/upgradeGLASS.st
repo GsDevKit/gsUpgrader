@@ -55,7 +55,7 @@ upgradeGLASS
           #('GsCore' 'GsMonticello' 'GsOB' 'GsMisc')
             do: [ :gsProjectName | 
               "Patch registrations with proper repository"
-              Metacello image
+              self metacelloClass image
                 configuration: gsProjectName;
                 repository:
                     'http://seaside.gemtalksystems.com/ss/MetacelloRepository';
