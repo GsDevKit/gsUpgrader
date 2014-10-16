@@ -17,6 +17,7 @@ upgradeGLASS
       self log: 'Upgrading GLASS to 1.0-beta.9.3'.
       self
         deploy: [ 
+          self upgradeGofer.
           Gofer new
             package: 'ConfigurationOfGLASS';
             url: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository';
@@ -30,7 +31,6 @@ upgradeGLASS
               Gofer new
                 url: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository';
                 package: 'ConfigurationOfMetacello';
-                package: 'ConfigurationOfGofer';
                 package: 'ConfigurationOfGsCore';
                 package: 'ConfigurationOfGoferProjectLoader';
                 package: 'ConfigurationOfGsMonticello';
