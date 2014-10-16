@@ -29,8 +29,8 @@ upgradeGLASS
               [ 
               Gofer new
                 url: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository';
-                package: 'ConfigurationOfMetacello';
                 package: 'ConfigurationOfGofer';
+                package: 'ConfigurationOfMetacello';
                 package: 'ConfigurationOfGsCore';
                 package: 'ConfigurationOfGoferProjectLoader';
                 package: 'ConfigurationOfGsMonticello';
@@ -50,6 +50,7 @@ upgradeGLASS
                 version: '1.0-beta.9.2') load ]
                 on: (Smalltalk at: #'MetacelloSkipDirtyPackageLoad')
                 do: [ :ex | ex resume: false ] ].
+          self upgradeGofer.
           ((Smalltalk at: #'ConfigurationOfGLASS') project
             version: '1.0-beta.9.3') load.
           #('GsCore' 'GsMonticello' 'GsOB' 'GsMisc')
