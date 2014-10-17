@@ -49,7 +49,15 @@ upgradeGLASS
               ((Smalltalk at: #'ConfigurationOfGLASS') project
                 version: '1.0-beta.9.2') load ]
                 on: (Smalltalk at: #'MetacelloSkipDirtyPackageLoad')
-                do: [ :ex | ex resume: false ] ].
+                do: [ :ex | ex resume: false ] ]
+            ifFalse: [ 
+              "explicitly load Metacello #previewBootstrap"
+              Gofer new
+                url: 'http://seaside.gemtalksystems.com/ss/metacello';
+                package: 'ConfigurationOfMetacello';
+                load.
+              ((Smalltalk at: #'ConfigurationOfMetacello') project
+                version: #'previewBootstrap') load ].
           self upgradeGofer.
           ((Smalltalk at: #'ConfigurationOfGLASS') project
             version: '1.0-beta.9.3') load.
