@@ -7,7 +7,7 @@ cd ${GS_HOME}/gemstone/stones/travis
 
 # UPGRADE_TEST : ALL_UPGRADE, 
 #                TEST_FILETREE, TEST_GLASS1, TEST_GREASE, TEST_GREASE_GLASS1, TEST_SEASIDE31X, TEST_ZINC_2XX, 
-#                UPGRADE_GLASS, UPGRADE_GLASS1, UPGRADE_METACELLO 
+#                UPGRADE_GLASS, UPGRADE_GLASS1, UPGRADE_GsDevKit, UPGRADE_METACELLO 
 
 case "${UPGRADE_TEST}" in
 	"ALL_UPGRADE")
@@ -533,6 +533,32 @@ Gofer new
   load.
 (Smalltalk at: #GsUpgrader) upgradeGrease.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
+
+exit 
+EOF
+		stopStone travis
+		;;
+	"UPGRADE_GsDevKit")
+		stoneExtent travis
+		startStone travis
+		echo "=================================="
+		echo "TESTING: upgradeGsDevKit"
+		echo "=================================="
+		topaz -l -q -T50000 <<EOF
+iferr 1 stk
+iferr 3 exit 1
+login
+run
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
+(Smalltalk at: #GsUpgrader) upgradeGsDevKit
 %
 print
 (Smalltalk at: #GsUpgrader) metacelloReport
