@@ -7,14 +7,14 @@ cd ${GS_HOME}/gemstone/stones/travis
 
 # UPGRADE_TEST : ALL_UPGRADE, 
 #                TEST_FILETREE, TEST_GLASS1, TEST_GREASE, TEST_GREASE_GLASS1, TEST_SEASIDE31X, TEST_ZINC_2XX, 
-#                UPGRADE_GLASS, UPGRADE_GLASS1, UPGRADE_METACELLO 
+#                UPGRADE_GLASS, UPGRADE_GLASS1, UPGRADE_GLASS1_GsDevKit, UPGRADE_GsDevKit, UPGRADE_METACELLO 
 
 case "${UPGRADE_TEST}" in
 	"ALL_UPGRADE")
 		stoneExtent travis
 		startStone travis
 		echo "=================================="
-		echo "TESTING: upgradeGLASS, upgradeMetacello, upgradeGrease, upgradeGLASS1, upgradeGLASS, upgradeMetacello, upgradeGrease, upgradeGLASS1"
+		echo "TESTING: upgradeGLASS, upgradeMetacello, upgradeGrease, upgradeGLASS1, upgradeGLASS, upgradeMetacello, upgradeGrease, upgradeGLASS1, upgradeGsDevKit"
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
@@ -35,6 +35,7 @@ run
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 (Smalltalk at: #GsUpgrader) upgradeGrease.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
+(Smalltalk at: #GsUpgrader) upgradeGsDevKit.
 %
 run
 Transcript 
@@ -45,6 +46,7 @@ Transcript
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 (Smalltalk at: #GsUpgrader) upgradeGrease.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
+(Smalltalk at: #GsUpgrader) upgradeGsDevKit.
 %
 print
 (Smalltalk at: #GsUpgrader) metacelloReport
@@ -89,7 +91,7 @@ Metacello new
   baseline: 'FileTree';
   repository: 'github://dalehenrich/filetree:gemstone2.4/repository';
   load: 'Tests'.
-(Smalltalk at: #GsUpgrader) upgradeGLASS1.
+(Smalltalk at: #GsUpgrader) upgradeGsDevKit.
 %
 print
 (Smalltalk at: #GsUpgrader) metacelloReport
@@ -214,7 +216,7 @@ EOF
 		stoneExtent travis
 		startStone travis
 		echo "=================================="
-		echo "TESTING: upgradeGLASS1 and install and run Grease tests"
+		echo "TESTING: install and run Grease tests"
 		echo "=================================="
 		topaz -l -q -T50000 <<EOF
 iferr 1 stk
@@ -302,6 +304,64 @@ run
   baseline: 'Grease';
   load: 'Tests'.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
+# if there are defects, display the failures and set test failure flag
+level 1
+run
+| results defects |
+UserGlobals at: #TEST_FAILURE put: false. 
+results := TestCase suite run .
+(defects := results errors asArray, results unexpectedFailures asArray) isEmpty 
+  ifTrue: [ ^results printString ].
+UserGlobals at: #TEST_FAILURE put: true.
+defects := defects collect: [:each | each printString ].
+^defects
+%
+# if the test failure flag is set, throw an error and inform travis of the failure
+run
+TEST_FAILURE ifTrue: [nil error: 'test failures'].
+%
+exit 
+EOF
+		stopStone travis
+		;;
+	"TEST_GSDEVKIT")
+		stoneExtent travis
+		startStone travis
+		echo "=================================="
+		echo "TESTING: upgradeGsDevKit and run tests"
+		echo "=================================="
+		topaz -l -q -T50000 <<EOF
+iferr 1 stk
+iferr 3 exit 1
+set user SystemUser p swordfish
+login
+
+# synchronize timezones
+run
+TimeZone default: TimeZone fromLinux
+%
+commit
+logout
+
+set user DataCurator p swordfish
+login
+
+run
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
+run
+(Smalltalk at: #GsUpgrader) upgradeGsDevKit.
 %
 print
 (Smalltalk at: #GsUpgrader) metacelloReport
@@ -492,6 +552,30 @@ exit
 EOF
 		stopStone travis
 		;;
+	"UPGRADE_GLASS1_GsDevKit")
+		stoneExtent travis
+		startStone travis
+		echo "=================================="
+		echo "TESTING: upgradeGLASS1 then upgradeGsDevKit"
+		echo "=================================="
+		topaz -l -q -T50000 <<EOF
+iferr 1 stk
+iferr 3 exit 1
+login
+run
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
+(Smalltalk at: #GsUpgrader) upgradeGLASS1.
+(Smalltalk at: #GsUpgrader) upgradeGsDevKit.
+%
+
+exit 
+EOF
+		stopStone travis
+		;;
 	"UPGRADE_GREASE")
 		stoneExtent travis
 		startStone travis
@@ -533,6 +617,32 @@ Gofer new
   load.
 (Smalltalk at: #GsUpgrader) upgradeGrease.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1
+%
+print
+(Smalltalk at: #GsUpgrader) metacelloReport
+%
+
+exit 
+EOF
+		stopStone travis
+		;;
+	"UPGRADE_GsDevKit")
+		stoneExtent travis
+		startStone travis
+		echo "=================================="
+		echo "TESTING: upgradeGsDevKit"
+		echo "=================================="
+		topaz -l -q -T50000 <<EOF
+iferr 1 stk
+iferr 3 exit 1
+login
+run
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
+(Smalltalk at: #GsUpgrader) upgradeGsDevKit
 %
 print
 (Smalltalk at: #GsUpgrader) metacelloReport

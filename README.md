@@ -24,7 +24,7 @@ The **GsUpgrader** class provides 4 different upgrade entry points and a diagnos
 - [upgrade GLASS1](#gsupgrader-classupgradeglass1)
 - [upgrade Grease](#gsupgrader-classupgradegrease)
 - [upgrade Metacello](#gsupgrader-classupgrademetacello)
-- [diagnostics]((#gsupgrader-classmetacelloreport)
+- [diagnostics](#gsupgrader-classmetacelloreport)
 
 **Note**: *If you have locked one of the projects: GLASS1, Grease, or Metacello then the lock will be honored. 
 If you have locked one of the projects and the repository does not match the default repository location, then you will be responsible for handling the upgrade yourself.*
