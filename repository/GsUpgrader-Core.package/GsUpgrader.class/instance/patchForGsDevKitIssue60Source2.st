@@ -44,7 +44,7 @@ patchForGsDevKitIssue60Source2
     whileTrue: [
       Transcript cr; show: ''getResponseUpTo:ignoring:[1] '', tries printString.
 self underlyingSocket raiseExceptionOnError: true. 
-      (self waitForReadDataUpToMs: 6000)
+      (self waitForReadDataUpToMs: 500)
         ifFalse: [ 
            self error: self underlyingSocket lastErrorString ].
       bytesRead _ self readInto: buf startingAt: 1 for: buf size.
