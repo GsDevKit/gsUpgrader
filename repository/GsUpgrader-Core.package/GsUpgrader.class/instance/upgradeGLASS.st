@@ -12,6 +12,7 @@ upgradeGLASS
       self inform: 'MetacelloPreview is loaded. Skipping GLASS upgrade.'.
       ^ self ].
   glassVersion := self projectVersion: 'ConfigurationOfGLASS'.
+  self patchForGsDevKitIssue60.
   glassVersion versionNumber < '1.0-beta.9.3' asMetacelloVersionNumber
     ifTrue: [ 
       self log: 'Upgrading GLASS to 1.0-beta.9.3'.
@@ -46,6 +47,7 @@ upgradeGLASS
                 version: #'previewBootstrap') load.
               ((Smalltalk at: #'ConfigurationOfGLASS') project
                 version: '1.0-beta.9.2') load: #('Core' 'Monticello').
+              self patchForGsDevKitIssue60.	"re-apply patch"
               ((Smalltalk at: #'ConfigurationOfGLASS') project
                 version: '1.0-beta.9.2') load ]
                 on: (Smalltalk at: #'MetacelloSkipDirtyPackageLoad')
