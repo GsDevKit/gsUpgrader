@@ -9,12 +9,13 @@ patchForGsDevKitIssue60Source2
       comparing to the marker.  Return three parts: header, marker, beginningOfData.
      Fails if no marker in first 2000 chars."
 
-  | buf response bytesRead tester mm skipped |
+  | buf response bytesRead tester mm skipped tries |
   buf _ ByteArray new: 2000.
   response _ WriteStream on: ByteArray new.
   tester _ 1.
   mm _ 1.
   skipped _ 0.
+  tries := 3.
   [ 
   tester _ tester - markerString size + 1 max: 1.	"rewind a little, in case the marker crosses a read boundary"
   tester to: response position - 1 do: [ :tt | 
@@ -37,7 +38,8 @@ patchForGsDevKitIssue60Source2
           with: markerString
           with: (buf asString copyFrom: tt + 1 to: response position - 1) ] ].
   tester _ 1 max: response position.	"OK if mm in the middle"
-  response position < buf size & (self isActive | self readyForRead) ]
+  response position < buf size & (self isActive | self readyForRead)
+    & ((tries := tries - 1) >= 0) ]
     whileTrue: [ 
       (self waitForReadDataUpToMs: 500)
         ifFalse: [ self error: ''data was late'' ].
