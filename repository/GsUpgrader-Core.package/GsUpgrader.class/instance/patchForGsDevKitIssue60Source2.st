@@ -41,7 +41,7 @@ patchForGsDevKitIssue60Source2
   response position < buf size & (self isActive | self readyForRead)
     & ((tries := tries - 1) >= 0) ]
     whileTrue: [ 
-      (self waitForReadDataUpToMs: 2000)
+      (self waitForReadDataUpToMs: 100)
         ifFalse: [ 
           tries < 0
             ifTrue: [ self error: ''data was late'' ] ].
