@@ -46,8 +46,7 @@ patchForGsDevKitIssue60Source2
 self underlyingSocket raiseExceptionOnError: true. 
       (self waitForReadDataUpToMs: 6000)
         ifFalse: [ 
-          tries < 0
-            ifTrue: [ self error: ''data was late'' ] ].
+           self error: self underlyingSocket lastErrorString ].
       bytesRead _ self readInto: buf startingAt: 1 for: buf size.
       response nextPutAll: (buf copyFrom: 1 to: bytesRead) ].
   ^ Array with: response contents asString with: '' with: ''	"Marker not found and connection closed"'
