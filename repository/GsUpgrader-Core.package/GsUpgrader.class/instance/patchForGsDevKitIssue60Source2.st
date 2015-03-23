@@ -10,6 +10,7 @@ patchForGsDevKitIssue60Source2
      Fails if no marker in first 2000 chars."
 
   | buf response bytesRead tester mm skipped tries |
+  Transcript cr; show: ''getResponseUpTo:ignoring:[0] ''. 
   buf _ ByteArray new: 2000.
   response _ WriteStream on: ByteArray new.
   tester _ 1.
@@ -41,7 +42,7 @@ patchForGsDevKitIssue60Source2
   response position < buf size & (self isActive | self readyForRead)
     & ((tries := tries - 1) >= 0) ]
     whileTrue: [
-      Transcript cr; show: ''getResponseUpTo:ignoring: '', tries printString. 
+      Transcript cr; show: ''getResponseUpTo:ignoring:[1] '', tries printString. 
       (self waitForReadDataUpToMs: 6000)
         ifFalse: [ 
           tries < 0
