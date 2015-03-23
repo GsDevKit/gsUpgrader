@@ -40,8 +40,9 @@ patchForGsDevKitIssue60Source2
   tester _ 1 max: response position.	"OK if mm in the middle"
   response position < buf size & (self isActive | self readyForRead)
     & ((tries := tries - 1) >= 0) ]
-    whileTrue: [ 
-      (self waitForReadDataUpToMs: 100)
+    whileTrue: [
+      Transcript cr; show: ''getResponseUpTo:ignoring: '', tries printString. 
+      (self waitForReadDataUpToMs: 6000)
         ifFalse: [ 
           tries < 0
             ifTrue: [ self error: ''data was late'' ] ].
