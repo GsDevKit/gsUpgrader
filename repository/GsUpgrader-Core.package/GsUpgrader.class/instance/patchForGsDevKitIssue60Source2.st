@@ -44,9 +44,9 @@ patchForGsDevKitIssue60Source2
     whileTrue: [
       Transcript cr; show: ''getResponseUpTo:ignoring:[1] '', tries printString.
 self underlyingSocket raiseExceptionOnError: true. 
-      (self waitForReadDataUpToMs: 500)
+      (self waitForReadDataUpToMs: 12000)
         ifFalse: [ 
-           self error: self underlyingSocket lastErrorString ].
+           self error: ''data was late'' ].
       bytesRead _ self readInto: buf startingAt: 1 for: buf size.
       response nextPutAll: (buf copyFrom: 1 to: bytesRead) ].
   ^ Array with: response contents asString with: '' with: ''	"Marker not found and connection closed"'
