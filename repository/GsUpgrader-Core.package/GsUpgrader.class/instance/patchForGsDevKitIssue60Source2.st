@@ -42,7 +42,8 @@ patchForGsDevKitIssue60Source2
   response position < buf size & (self isActive | self readyForRead)
     & ((tries := tries - 1) >= 0) ]
     whileTrue: [
-      Transcript cr; show: ''getResponseUpTo:ignoring:[1] '', tries printString. 
+      Transcript cr; show: ''getResponseUpTo:ignoring:[1] '', tries printString.
+self underlyingSocket raiseExceptionOnError: true. 
       (self waitForReadDataUpToMs: 6000)
         ifFalse: [ 
           tries < 0
