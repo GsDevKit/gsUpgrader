@@ -20,8 +20,8 @@ patchForGsDevKitIssue60Source2
         on: Error
         do: [ :ex | 
           retries := retries + 1.
-          retry := retries
-            <= 3 Transcript cr;
+          retry := retries <= 3.
+          Transcript cr;
             show:
                 ''Error: '' , ex description printString
                     ,
