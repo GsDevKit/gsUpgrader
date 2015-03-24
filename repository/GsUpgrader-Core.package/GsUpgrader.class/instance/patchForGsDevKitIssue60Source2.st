@@ -8,7 +8,7 @@ patchForGsDevKitIssue60Source2
   | contents retries retry |
   retries := 0.
   retry := true.
-  [  ]
+  [  retry  ]
     whileTrue: [ 
       [ 
       contents := HTTPSocket
