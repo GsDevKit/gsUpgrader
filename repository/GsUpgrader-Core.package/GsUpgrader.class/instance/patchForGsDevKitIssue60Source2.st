@@ -6,10 +6,12 @@ patchForGsDevKitIssue60Source2
 
   ^ 'readStreamForUrl: url user: user passwd: password do: aBlock
   | contents retries |
+Transcript cr; show: ''readStreamForUrl: [0] '', url printString.
   retries := 0.
   [ true ]
     whileTrue: [ 
       [ 
+Transcript cr; show: ''readStreamForUrl: [1] '', retries printString.
       contents := HTTPSocket
         httpGet: url
         args: nil
@@ -18,7 +20,7 @@ patchForGsDevKitIssue60Source2
         on: Error
         do: [ :ex | 
           retries := retries + 1.
-          retries > 3
+Transcript cr; show: ''readStreamForUrl: [2] '', (retries > 3) printString.          retries > 3
             ifTrue: [ ex pass ].
           Transcript
             cr;
