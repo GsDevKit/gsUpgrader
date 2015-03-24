@@ -6,33 +6,26 @@ patchForGsDevKitIssue60Source2
 
   ^ 'readStreamForUrl: url user: user passwd: password do: aBlock
   | contents retries |
-Transcript cr; show: ''readStreamForUrl: [0] '', url printString.
   retries := 0.
   [ retries <= 3 ]
     whileTrue: [ 
       [ 
-retries := retries + 1.
-Transcript cr; show: ''readStreamForUrl: [1] '', retries printString.
+      retries := retries + 1.
       contents := HTTPSocket
         httpGet: url
         args: nil
         user: user
         passwd: password.
-retries := 4.
- ]
+      retries := 4 ]
         on: Error
         do: [ :ex | 
-          
-Transcript cr; show: ''readStreamForUrl: [2] '', (retries > 3) printString.          retries > 3
+          retries > 3
             ifTrue: [ ex pass ].
           Transcript
             cr;
             show:
-                ''Error: '' , ex description printString
-                    ,
-                      '' during MCPlatformSupport class>>readStreamForUrl:user:passwd:do: for ''
-                    , url printString , '' Retrying ('' , retries printString
-                    , '')'' ] ].
+                ''Retrying '' , url printString , '' ('' , retries printString , '') ''
+                    , ex description printString ] ].
   ^ contents isString
     ifTrue: [ nil ]
     ifFalse: [ aBlock value: contents ]'
