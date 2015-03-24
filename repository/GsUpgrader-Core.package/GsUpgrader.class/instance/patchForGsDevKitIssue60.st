@@ -12,7 +12,7 @@ patchForGsDevKitIssue60
   Smalltalk
     at: #'MCPlatformSupport'
     ifPresent: [ :cls | 
-      self log: 'Installing patchForGsDevKitIssue60: ' cls name asString , ' class'.
+      self log: 'Installing patchForGsDevKitIssue60: ' , cls name asString , ' class'.
       cls class
         compile: self patchForGsDevKitIssue60Source2
         classified: protocol ]
