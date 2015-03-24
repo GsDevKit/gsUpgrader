@@ -39,7 +39,7 @@ patchForGsDevKitIssue60Source1
   tester _ 1 max: response position.	"OK if mm in the middle"
   response position < buf size & (self isActive | self readyForRead) ]
     whileTrue: [ 
-      (self waitForReadDataUpToMs: 20000)
+      (self waitForReadDataUpToMs: 60000)
         ifFalse: [ self error: ''data was late'' ].
       bytesRead _ self readInto: buf startingAt: 1 for: buf size.
       response nextPutAll: (buf copyFrom: 1 to: bytesRead) ].
