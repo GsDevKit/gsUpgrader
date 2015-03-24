@@ -7,7 +7,7 @@ patchForGsDevKitIssue60
   Smalltalk
     at: #'HTTPSocket'
     ifPresent: [ :cls | 
-      self log: 'Installing patchForGsDevKitIssue60: ' cls name asString.
+      self log: 'Installing patchForGsDevKitIssue60: ' , cls name asString.
       cls compile: self patchForGsDevKitIssue60Source1 classified: protocol ].
   Smalltalk
     at: #'MCPlatformSupport'
