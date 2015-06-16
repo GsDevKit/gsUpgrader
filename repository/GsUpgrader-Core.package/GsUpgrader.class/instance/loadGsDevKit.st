@@ -2,13 +2,16 @@ loading
 loadGsDevKit
   | metacello |
   self upgradeMetacello.
-  metacello := self metacelloClass new
-    baseline: 'GsDevKit';
-    repository: self gsDevKitRepositoryDescription;
-    yourself.
+  metacello := self gsDevKitLocked
+    ifTrue: [ self metacelloClass registry ]
+    ifFalse: [ 
+      self metacelloClass new
+        repository: self gsDevKitRepositoryDescription;
+        yourself ].
+  metacello baseline: 'GsDevKit'.
   self
     deploy: [ 
+      "May be running with an old version of Metacello so copy the Metacello instance"
       self log: 'Installing GsDevKit'.
-      metacello
-        get;
-        load ]
+      metacello copy get.
+      metacello copy load ]
