@@ -13,6 +13,7 @@ upgradeGLASS
       ^ self ].
   glassVersion := self projectVersion: 'ConfigurationOfGLASS'.
   self patchForGsDevKitIssue60.
+  self log: 'Detected version ' , glassVersion printString , ' of GLASS'.
   glassVersion versionNumber < '1.0-beta.9.3' asMetacelloVersionNumber
     ifTrue: [ 
       self log: 'Upgrading GLASS to 1.0-beta.9.3'.
