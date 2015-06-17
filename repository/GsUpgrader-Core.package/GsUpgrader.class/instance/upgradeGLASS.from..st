@@ -60,6 +60,7 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
       self upgradeGofer.
       ((Smalltalk at: #'ConfigurationOfGLASS') project version: '1.0-beta.9.3')
         load.
+      ((Smalltalk at: #'ConfigurationOfGsCore') project version: #'stable') load.	"force update to 0.249 or later ...."
       #('GsCore' 'GsMonticello' 'GsOB' 'GsMisc')
         do: [ :gsProjectName | 
           "Patch registrations with proper repository"
