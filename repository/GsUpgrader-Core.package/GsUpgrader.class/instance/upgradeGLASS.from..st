@@ -48,7 +48,7 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
           self logPackageReport: 'AFTER Gofer load'.
           usingAlternate
             ifTrue: [ 
-              #('ConfigurationOfGLASS' 'ConfigurationOfGofer' #';' 'ConfigurationOfMetacello' #';' 'ConfigurationOfGsCore' #';' 'ConfigurationOfGoferProjectLoader' #';' 'ConfigurationOfGsMonticello' #';' 'ConfigurationOfGsOB' #';' 'ConfigurationOfGsMisc' #';' 'ConfigurationOfGsSqueakCommon')
+              #('ConfigurationOfGLASS' 'ConfigurationOfGofer' 'ConfigurationOfMetacello' 'ConfigurationOfGsCore' 'ConfigurationOfGoferProjectLoader' 'ConfigurationOfGsMonticello' 'ConfigurationOfGsOB' 'ConfigurationOfGsMisc' 'ConfigurationOfGsSqueakCommon')
                 do: [ :packageName | 
                   | wc rg |
                   wc := MCWorkingCopy forPackage: packageName.
