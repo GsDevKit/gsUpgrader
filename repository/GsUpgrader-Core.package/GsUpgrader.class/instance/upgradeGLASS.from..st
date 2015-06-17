@@ -8,13 +8,19 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
       | repository |
       repository := configurationDirectoryOrNil
         ifNotNil: [ 
+          self
+            log:
+              'Using alternate repository: ' , configurationDirectoryOrNil printString.
           MCDirectoryRepository new
             directory: (ServerFileDirectory on: configurationDirectoryOrNil) ]
         ifNil: [ 
+          self log: 'Using default repository: ' , configurationDirectoryOrNil printString.
           MCHttpRepository
             location: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository'
             user: ''
             password: '' ].
+      self log: 'BEFORE Gofer load'.
+      self packageReportOn: Transcript.
       Gofer new
         package: 'ConfigurationOfGLASS';
         repository: repository;
@@ -35,7 +41,9 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
             package: 'ConfigurationOfGsOB';
             package: 'ConfigurationOfGsMisc';
             package: 'ConfigurationOfGsSqueakCommon';
-            load ]
+            load.
+          self log: 'AFTER Gofer load'.
+          self packageReportOn: Transcript ]
             on: Warning
             do: [ :ex | 
               self log: ex description.
