@@ -5,7 +5,7 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
   self log: 'Upgrading GLASS to 1.0-beta.9.3'.
   self
     deploy: [ 
-      | repository |
+      | repository strm |
       repository := configurationDirectoryOrNil
         ifNotNil: [ 
           self
@@ -20,7 +20,11 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
             user: ''
             password: '' ].
       self log: 'BEFORE Gofer load'.
-      self packageReportOn: Transcript.
+      strm := WriteStream on: String new.
+      self packageReportOn: strm.
+      Transcript
+        cr;
+        show: strm contents.
       Gofer new
         package: 'ConfigurationOfGLASS';
         repository: repository;
@@ -43,7 +47,11 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
             package: 'ConfigurationOfGsSqueakCommon';
             load.
           self log: 'AFTER Gofer load'.
-          self packageReportOn: Transcript ]
+          strm := WriteStream on: String new.
+          self packageReportOn: strm.
+          Transcript
+            cr;
+            show: strm contents ]
             on: Warning
             do: [ :ex | 
               self log: ex description.
