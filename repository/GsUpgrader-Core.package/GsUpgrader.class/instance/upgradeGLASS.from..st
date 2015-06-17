@@ -5,7 +5,7 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
   self log: 'Upgrading GLASS to 1.0-beta.9.3'.
   self
     deploy: [ 
-      | repository strm |
+      | repository |
       repository := configurationDirectoryOrNil
         ifNotNil: [ 
           self
@@ -19,12 +19,7 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
             location: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository'
             user: ''
             password: '' ].
-      self log: 'BEFORE Gofer load'.
-      strm := WriteStream on: String new.
-      self packageReportOn: strm.
-      Transcript
-        cr;
-        show: strm contents.
+      self logPackageReport: 'BEFORE Gofer load'.
       Gofer new
         package: 'ConfigurationOfGLASS';
         repository: repository;
@@ -46,12 +41,7 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
             package: 'ConfigurationOfGsMisc';
             package: 'ConfigurationOfGsSqueakCommon';
             load.
-          self log: 'AFTER Gofer load'.
-          strm := WriteStream on: String new.
-          self packageReportOn: strm.
-          Transcript
-            cr;
-            show: strm contents ]
+          self logPackageReport: 'AFTER Gofer load' ]
             on: Warning
             do: [ :ex | 
               self log: ex description.
@@ -74,9 +64,9 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
           ((Smalltalk at: #'ConfigurationOfMetacello') project
             version: #'previewBootstrap') load ].
       self upgradeGofer.
+      self logPackageReport: 'BEFORE 1.0-beta.9.3 load'.
       ((Smalltalk at: #'ConfigurationOfGLASS') project version: '1.0-beta.9.3')
         load.
-      ((Smalltalk at: #'ConfigurationOfGsCore') project version: #'stable') load.	"force update to 0.249 or later ...."
       #('GsCore' 'GsMonticello' 'GsOB' 'GsMisc')
         do: [ :gsProjectName | 
           "Patch registrations with proper repository"
