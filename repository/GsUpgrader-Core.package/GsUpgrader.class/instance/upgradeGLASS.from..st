@@ -51,6 +51,8 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
               #('ConfigurationOfGLASS' 'ConfigurationOfGofer' 'ConfigurationOfMetacello' 'ConfigurationOfGsCore' 'ConfigurationOfGoferProjectLoader' 'ConfigurationOfGsMonticello' 'ConfigurationOfGsOB' 'ConfigurationOfGsMisc' 'ConfigurationOfGsSqueakCommon')
                 do: [ :packageName | 
                   | wc rg |
+                  wc := MCWorkingCopy allManagers
+                    detect: [ :ea | ea package name = packageName ].
                   wc := MCWorkingCopy forPackage: packageName.
                   rg := wc repositoryGroup.
                   rg repositories
