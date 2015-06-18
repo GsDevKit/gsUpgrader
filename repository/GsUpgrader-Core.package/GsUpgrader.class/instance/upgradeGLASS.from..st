@@ -58,7 +58,8 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
                       repo = MCCacheRepository default
                         ifFalse: [ 
                           repo = repository
-                            ifFalse: [ rg removeRepository: repo ] ] ] ] ] ]
+                            ifFalse: [ rg removeRepository: repo ] ] ].
+                  rg addRepository: repository ] ] ]
             on: Warning
             do: [ :ex | 
               self log: ex description.
