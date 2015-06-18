@@ -18,7 +18,7 @@ TDScriptLeafNode{#name:'deploy',#contents:'[ :topez :objIn :tokens :command :com
         reject: [ :each | each = MCCacheRepository default ]) first.
       mcTool
         mccopy: wc ancestry ancestorString
-        from: sourceRepo description
+        fromRepository: sourceRepo 
         to: {(opts at: \'repo\')} ]
     ifPresent: [ :ignored | 
       TDManPage
@@ -33,4 +33,4 @@ EXAMPLES
   ./deploy --repo=server:///opt/git/gsUpgrader/monticello
   ./deploy --repo=http://ss3.gemtalksystems.com/ss/gsUpgrader
 \'
-        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2014-09-10T16:37:50.8611249923706-07:00']}
+        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2015-06-18T11:58:09.308983087539673-07:00']}
