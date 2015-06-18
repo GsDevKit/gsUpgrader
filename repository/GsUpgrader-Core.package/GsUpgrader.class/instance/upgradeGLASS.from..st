@@ -5,20 +5,16 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
   self log: 'Upgrading GLASS to 1.0-beta.9.3'.
   self
     deploy: [ 
-      | repository usingAlternate |
+      | repository |
       repository := configurationDirectoryOrNil
         ifNotNil: [ 
-          usingAlternate := true.
           self
             log:
               'Using alternate repository: ' , configurationDirectoryOrNil printString.
           MCDirectoryRepository new
             directory: (ServerFileDirectory on: configurationDirectoryOrNil) ]
         ifNil: [ 
-          usingAlternate := false.
-          self
-            log:
-              'Using default repository: ' , configurationDirectoryOrNil printString.
+          self log: 'Using default repository: ' , configurationDirectoryOrNil printString.
           MCHttpRepository
             location: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository'
             user: ''
@@ -45,22 +41,7 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
             package: 'ConfigurationOfGsMisc';
             package: 'ConfigurationOfGsSqueakCommon';
             load.
-          self logPackageReport: 'AFTER Gofer load'.
-          usingAlternate
-            ifTrue: [ 
-              #('ConfigurationOfGLASS' 'ConfigurationOfGofer' 'ConfigurationOfMetacello' 'ConfigurationOfGsCore' 'ConfigurationOfGoferProjectLoader' 'ConfigurationOfGsMonticello' 'ConfigurationOfGsOB' 'ConfigurationOfGsMisc' 'ConfigurationOfGsSqueakCommon')
-                do: [ :packageName | 
-                  | wc rg |
-                  wc := MCWorkingCopy allManagers
-                    detect: [ :ea | ea package name = packageName ].
-                  rg := wc repositoryGroup.
-                  rg repositories
-                    do: [ :repo | 
-                      repo = MCCacheRepository default
-                        ifFalse: [ 
-                          repo = repository
-                            ifFalse: [ rg removeRepository: repo ] ] ].
-                  rg addRepository: repository ] ] ]
+          self logPackageReport: 'AFTER Gofer load' ]
             on: Warning
             do: [ :ex | 
               self log: ex description.
