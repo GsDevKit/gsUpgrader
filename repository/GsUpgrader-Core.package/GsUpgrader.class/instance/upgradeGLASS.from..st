@@ -5,16 +5,20 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
   self log: 'Upgrading GLASS to 1.0-beta.9.3'.
   self
     deploy: [ 
-      | repository |
+      | repository usingAlternate |
       repository := configurationDirectoryOrNil
         ifNotNil: [ 
+          usingAlternate := true.
           self
             log:
               'Using alternate repository: ' , configurationDirectoryOrNil printString.
           MCDirectoryRepository new
             directory: (ServerFileDirectory on: configurationDirectoryOrNil) ]
         ifNil: [ 
-          self log: 'Using default repository: ' , configurationDirectoryOrNil printString.
+          usingAlternate := false.
+          self
+            log:
+              'Using default repository: ' , configurationDirectoryOrNil printString.
           MCHttpRepository
             location: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository'
             user: ''
@@ -28,22 +32,7 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
           self metacelloBootstrap10beta311Loaded
             ifFalse: [ self loadMetacelloBootstrap10beta311 ].
           [ 
-          [ 
-          Gofer new
-            repository: repository;
-            package: 'ConfigurationOfGofer';
-            package: 'ConfigurationOfMetacello';
-            package: 'ConfigurationOfGsCore';
-            package: 'ConfigurationOfGoferProjectLoader';
-            package: 'ConfigurationOfGsMonticello';
-            package: 'ConfigurationOfGsOB';
-            package: 'ConfigurationOfGsMisc';
-            package: 'ConfigurationOfGsSqueakCommon';
-            load ]
-            on: Warning
-            do: [ :ex | 
-              self log: ex description.
-              ex resume ].
+          self refreshGLASSConfigurations: repository.
           ((Smalltalk at: #'ConfigurationOfMetacello') project
             version: #'previewBootstrap') load.
           ((Smalltalk at: #'ConfigurationOfGLASS') project
@@ -55,6 +44,10 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
             do: [ :ex | ex resume: false ] ]
         ifFalse: [ 
           "explicitly load Metacello #previewBootstrap"
+          usingAlternate
+            ifTrue: [ 
+              "refresh only needed if using alternate repo"
+              self refreshGLASSConfigurations: repository ].
           Gofer new
             url: 'http://seaside.gemtalksystems.com/ss/metacello';
             package: 'ConfigurationOfMetacello';
