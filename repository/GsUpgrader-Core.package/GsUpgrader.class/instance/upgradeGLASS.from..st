@@ -53,7 +53,6 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
                   | wc rg |
                   wc := MCWorkingCopy allManagers
                     detect: [ :ea | ea package name = packageName ].
-                  wc := MCWorkingCopy forPackage: packageName.
                   rg := wc repositoryGroup.
                   rg repositories
                     do: [ :repo | 
