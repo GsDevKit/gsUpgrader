@@ -19,7 +19,6 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
             location: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository'
             user: ''
             password: '' ].
-      self logPackageReport: 'BEFORE Gofer load'.
       Gofer new
         package: 'ConfigurationOfGLASS';
         repository: repository;
@@ -40,8 +39,7 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
             package: 'ConfigurationOfGsOB';
             package: 'ConfigurationOfGsMisc';
             package: 'ConfigurationOfGsSqueakCommon';
-            load.
-          self logPackageReport: 'AFTER Gofer load' ]
+            load ]
             on: Warning
             do: [ :ex | 
               self log: ex description.
@@ -64,7 +62,6 @@ upgradeGLASS: configurationDirectoryOrNil from: glassVersion
           ((Smalltalk at: #'ConfigurationOfMetacello') project
             version: #'previewBootstrap') load ].
       self upgradeGofer.
-      self logPackageReport: 'BEFORE 1.0-beta.9.3 load'.
       ((Smalltalk at: #'ConfigurationOfGLASS') project version: '1.0-beta.9.3')
         load.
       #('GsCore' 'GsMonticello' 'GsOB' 'GsMisc')
