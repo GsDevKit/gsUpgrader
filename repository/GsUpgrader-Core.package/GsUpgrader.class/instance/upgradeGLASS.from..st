@@ -1,21 +1,21 @@
 private
-upgradeGLASS: alternateConfigurationRepositoryOrNil from: glassVersion
+upgradeGLASS: alternateConfigurationRepositoryDirectoryPathOrNil from: glassVersion
   "skip this step if GLASS1 is already loaded"
 
   self log: 'Upgrading GLASS to 1.0-beta.9.3'.
   self
     deploy: [ 
       | repository usingAlternate |
-      repository := alternateConfigurationRepositoryOrNil
+      repository := alternateConfigurationRepositoryDirectoryPathOrNil
         ifNotNil: [ 
           usingAlternate := true.
           self
             log:
               'Using alternate repository: '
-                , alternateConfigurationRepositoryOrNil printString.
+                , alternateConfigurationRepositoryDirectoryPathOrNil printString.
           MCDirectoryRepository new
             directory:
-              (ServerFileDirectory on: alternateConfigurationRepositoryOrNil) ]
+              (ServerFileDirectory on: alternateConfigurationRepositoryDirectoryPathOrNil) ]
         ifNil: [ 
           usingAlternate := false.
           self
