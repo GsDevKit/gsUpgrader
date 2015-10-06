@@ -28,9 +28,11 @@ TDScriptLeafNode{#name:'deploy',#contents:'[ :topez :objIn :tokens :command :com
 SYNOPSIS
   deploy [-h|--help] --repo=<dest-repo>
 DESCRIPTION
+  Copy the loaded package of GsUpgrader-Core to the <dest-repo>.
+
 EXAMPLES
   ./deploy --help
   ./deploy --repo=server:///opt/git/gsUpgrader/monticello
   ./deploy --repo=http://ss3.gemtalksystems.com/ss/gsUpgrader
 \'
-        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2014-09-10T16:37:50.8611249923706-07:00']}
+        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2015-10-06T09:30:12.63084602355957-07:00']}
