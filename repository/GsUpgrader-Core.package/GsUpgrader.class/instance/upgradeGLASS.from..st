@@ -1,24 +1,26 @@
 private
-upgradeGLASS: configurationDirectoryOrNil from: glassVersion
+upgradeGLASS: alternateConfigurationRepositoryOrNil from: glassVersion
   "skip this step if GLASS1 is already loaded"
 
   self log: 'Upgrading GLASS to 1.0-beta.9.3'.
   self
     deploy: [ 
       | repository usingAlternate |
-      repository := configurationDirectoryOrNil
+      repository := alternateConfigurationRepositoryOrNil
         ifNotNil: [ 
           usingAlternate := true.
           self
             log:
-              'Using alternate repository: ' , configurationDirectoryOrNil printString.
+              'Using alternate repository: '
+                , alternateConfigurationRepositoryOrNil printString.
           MCDirectoryRepository new
-            directory: (ServerFileDirectory on: configurationDirectoryOrNil) ]
+            directory:
+              (ServerFileDirectory on: alternateConfigurationRepositoryOrNil) ]
         ifNil: [ 
           usingAlternate := false.
           self
             log:
-              'Using default repository: ' , configurationDirectoryOrNil printString.
+              'Using default repository: http://seaside.gemtalksystems.com/ss/MetacelloRepository'.
           MCHttpRepository
             location: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository'
             user: ''
