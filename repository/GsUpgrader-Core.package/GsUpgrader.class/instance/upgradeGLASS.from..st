@@ -8,6 +8,8 @@ upgradeGLASS: alternateConfigurationRepositoryDirectoryPathOrNil from: glassVers
       | repository usingAlternate |
       repository := alternateConfigurationRepositoryDirectoryPathOrNil
         ifNotNil: [ 
+          "Note that the alternate repository must have a copy of each of the 
+           configurations listed in GsUpgrader>>refreshGLASSConfigurations:"
           usingAlternate := true.
           self
             log:
