@@ -28,6 +28,8 @@ TDScriptLeafNode{#name:'deploy',#contents:'[ :topez :objIn :tokens :command :com
 SYNOPSIS
   deploy [-h|--help] --repo=<dest-repo>
 DESCRIPTION
+  Copy the loaded package of GsUpgrader-Core to the <dest-repo>.
+
 EXAMPLES
   ./deploy --help
   ./deploy --repo=server:///opt/git/gsUpgrader/monticello
