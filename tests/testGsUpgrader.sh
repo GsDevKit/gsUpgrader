@@ -35,7 +35,7 @@ run
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 (Smalltalk at: #GsUpgrader) upgradeGrease.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
-(Smalltalk at: #GsUpgrader) upgradeGsDevKit.
+false ifTrue: [ (Smalltalk at: #GsUpgrader) upgradeGsDevKit ].
 %
 run
 Transcript 
@@ -46,7 +46,7 @@ Transcript
 (Smalltalk at: #GsUpgrader) upgradeMetacello.
 (Smalltalk at: #GsUpgrader) upgradeGrease.
 (Smalltalk at: #GsUpgrader) upgradeGLASS1.
-(Smalltalk at: #GsUpgrader) upgradeGsDevKit.
+false ifTrue: [ (Smalltalk at: #GsUpgrader) upgradeGsDevKit ].
 %
 print
 (Smalltalk at: #GsUpgrader) metacelloReport
@@ -91,7 +91,7 @@ Metacello new
   baseline: 'FileTree';
   repository: 'github://dalehenrich/filetree:gemstone2.4/repository';
   load: 'Tests'.
-(Smalltalk at: #GsUpgrader) upgradeGsDevKit.
+(Smalltalk at: #GsUpgrader) upgradeGLASS1
 %
 print
 (Smalltalk at: #GsUpgrader) metacelloReport
