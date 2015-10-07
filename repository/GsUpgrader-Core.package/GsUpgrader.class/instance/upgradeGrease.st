@@ -5,5 +5,5 @@ upgradeGrease
       self
         upgradeMetacello;
         standardUpgrade: 'Grease' repository: self greaseRepositoryDescription ]
-    ifFalse: [ self loadGreaseBaseline ].
+    ifFalse: [ self loadGrease ].
   self lockGrease

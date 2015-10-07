@@ -4,6 +4,7 @@ TDScriptLeafNode{#name:'deploy',#contents:'[ :topez :objIn :tokens :command :com
   command
     getOptsMixedLongShort:
       {#(\'help\' $h #\'none\').
+      #(\'dir\' nil #\'required\').
       #(\'repo\' nil #\'required\')}
     optionsAndArguments: [ :options :operands | 
       opts := options.
@@ -11,22 +12,38 @@ TDScriptLeafNode{#name:'deploy',#contents:'[ :topez :objIn :tokens :command :com
   opts
     at: \'help\'
     ifAbsent: [ 
-      | mcTool wc sourceRepo |
+      | mcTool wc sourceRepo destRepoSpec |
       mcTool := topez toolInstanceFor: \'mc\'.
       wc := (mcTool mclist: \'GsUpgrader-Core\') first.
       sourceRepo := (wc repositoryGroup repositories
         reject: [ :each | each = MCCacheRepository default ]) first.
+      destRepoSpec := opts
+        at: \'repo\'
+        ifPresent: [ :repoSpec | repoSpec ]
+        ifAbsent: [ 
+          opts
+            at: \'dir\'
+            ifPresent: [ :directoryPathOrReference | 
+              (directoryPathOrReference
+                beginsWith: \'@\')
+                ifTrue: [ 
+                  | serverDir |
+                  serverDir := mcTool
+                    resolveAtPathReference: directoryPathOrReference.
+                  \'server://\' , serverDir fullName ]
+                ifFalse: [ \'server://\' , directoryPathOrReference ] ]
+            ifAbsent: [ nil error: \'--repo or --dir options required\' ] ].
       mcTool
         mccopy: wc ancestry ancestorString
-        from: sourceRepo description
-        to: {(opts at: \'repo\')} ]
+        fromRepository: sourceRepo
+        to: {destRepoSpec} ]
     ifPresent: [ :ignored | 
       TDManPage
         viewManPage:
           \'NAME
   deploy - deploy sript utility template
 SYNOPSIS
-  deploy [-h|--help] --repo=<dest-repo>
+  deploy [-h|--help] --repo=<dest-repo> | --dir=<directory-path>
 DESCRIPTION
   Copy the loaded package of GsUpgrader-Core to the <dest-repo>.
 
@@ -34,5 +51,8 @@ EXAMPLES
   ./deploy --help
   ./deploy --repo=server:///opt/git/gsUpgrader/monticello
   ./deploy --repo=http://ss3.gemtalksystems.com/ss/gsUpgrader
+
+  ./deploy --dir=@/sys/stone/dirs/GsUpgrader/monticello
+  ./deploy --dir=/opt/git/GsUpgrader/monticello
 \'
-        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2015-10-06T09:30:12.63084602355957-07:00']}
+        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2015-10-07T12:05:22.98613691329956-07:00']}
