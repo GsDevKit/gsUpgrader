@@ -79,23 +79,19 @@ env:
 
 before_script:
   - export BASE="$(pwd)"
-  - git clone --depth 1 https://github.com/GsDevKit/gsDevKitHome.git
-  - cd gsDevKitHome
+  - git clone --depth 1 https://github.com/GsDevKit/GsDevKit_home.git
+  - cd GsDevKit_home
+  - git checkout dev
   - export GS_HOME="$(pwd)"
   - export PATH=$GS_HOME/bin:$PATH
   - export GS_TRAVIS=true
-  - sudo apt-get update -qq
-  - sudo apt-get -y install libpam0g:i386
-  - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
-  - sudo apt-get install -qq gcc-multilib libcurl3:i386 libstdc++6:i386
-  - sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.6 /usr/lib/i386-linux-gnu/libstdc++.so
   - cd $BASE
 
 script:
-  - bash installGemStone $GS_VERSION
-  - bash createTodeImage
+  - bash installServer
+  - bash createClient tode
   - bash createStone travis $GS_VERSION
 
     # GsUpdater
   - bash tests/testGsUpgrader.sh
-
+G
