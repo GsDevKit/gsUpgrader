@@ -11,7 +11,7 @@ cd ${GS_HOME}/gemstone/stones/travis
 
 case "${UPGRADE_TEST}" in
 	"ALL_UPGRADE")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS, upgradeMetacello, upgradeGrease, upgradeGLASS1, upgradeGLASS, upgradeMetacello, upgradeGrease, upgradeGLASS1, upgradeGsDevKit"
@@ -57,7 +57,7 @@ EOF
 		stopStone travis
 		;;
 	"TEST_FILETREE")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeMetacello install and run FileTree tests"
@@ -117,7 +117,7 @@ EOF
 		stopStone travis
 		;;
 	"TEST_ISSUE_3")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: Issue #3"
@@ -154,7 +154,7 @@ EOF
 		stopStone travis
 		;;
 	"TEST_GLASS1")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS1 and run tests"
@@ -213,7 +213,7 @@ EOF
 		;;
 	"TEST_GREASE")
 		# NOTE - the tests for GREASE do not pass without loading GLASS1
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: install and run Grease tests"
@@ -268,7 +268,7 @@ EOF
 		stopStone travis
 		;;
 	"TEST_GREASE_GLASS1")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS1 and install and run Grease tests"
@@ -329,7 +329,7 @@ EOF
 		stopStone travis
 		;;
 	"TEST_GSDEVKIT")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGsDevKit and run tests"
@@ -387,7 +387,7 @@ EOF
 		stopStone travis
 		;;
 	"TEST_SEASIDE31X")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: Seaside3.1.x and run tests"
@@ -447,7 +447,7 @@ EOF
 		stopStone travis
 		;;
 	"TEST_ZINC_2XX")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: Zinc2.x.x and run tests"
@@ -507,7 +507,7 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GLASS")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS"
@@ -530,7 +530,7 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GLASS1")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS1"
@@ -553,7 +553,7 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GLASS1_GsDevKit")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS1 then upgradeGsDevKit"
@@ -577,7 +577,7 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GREASE")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGrease"
@@ -600,7 +600,7 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GREASE_GLASS1")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGrease then upgradeGLASS1"
@@ -627,7 +627,7 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GsDevKit")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGsDevKit"
@@ -653,7 +653,7 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_METACELLO")
-		newExtent travis
+		stoneNewExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeMetacello"
