@@ -94,4 +94,3 @@ script:
 
     # GsUpdater
   - bash tests/testGsUpgrader.sh
-G
