@@ -5,7 +5,7 @@ upgradeGLASS: alternateConfigurationRepositoryDirectoryPathOrNil from: glassVers
   self log: 'Upgrading GLASS to 1.0-beta.9.3'.
   self
     deploy: [ 
-      | repository usingAlternate |
+      | repository usingAlternate metacelloPreviewStableVersionString metacelloPreviewRepoPath |
       repository := alternateConfigurationRepositoryDirectoryPathOrNil
         ifNotNil: [ 
           "Note that the alternate repository must have a copy of each of the 
@@ -20,13 +20,19 @@ upgradeGLASS: alternateConfigurationRepositoryDirectoryPathOrNil from: glassVers
               (ServerFileDirectory on: alternateConfigurationRepositoryDirectoryPathOrNil) ]
         ifNil: [ 
           usingAlternate := false.
-          self
-            log:
-              'Using default repository: http://seaside.gemtalksystems.com/ss/MetacelloRepository'.
-          MCHttpRepository
-            location: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository'
-            user: ''
-            password: '' ].
+          repositoryOverride ~~ nil
+            ifTrue: [ 
+              self log: 'Using repositoryOverride: ' , repositoryOverride printString.
+              repositoryOverride ]
+            ifFalse: [ 
+              self
+                log:
+                  'Using default repository: http://seaside.gemtalksystems.com/ss/MetacelloRepository'.
+              MCHttpRepository
+                location:
+                  'http://seaside.gemtalksystems.com/ss/MetacelloRepository'
+                user: ''
+                password: '' ] ].
       Gofer new
         package: 'ConfigurationOfGLASS';
         repository: repository;
@@ -38,12 +44,18 @@ upgradeGLASS: alternateConfigurationRepositoryDirectoryPathOrNil from: glassVers
           [ 
           self refreshGLASSConfigurations: repository.
           ((Smalltalk at: #'ConfigurationOfMetacello') project
-            version: #'previewBootstrap') load.
+            version: #'previewBootstrap')
+            repositoryOverrides: self repositoryOverrides;
+            load.
           ((Smalltalk at: #'ConfigurationOfGLASS') project
-            version: '1.0-beta.9.2') load: #('Core' 'Monticello').
+            version: '1.0-beta.9.2')
+            repositoryOverrides: self repositoryOverrides;
+            load: #('Core' 'Monticello').
           self patchForGsDevKitIssue60.	"re-apply patch"
           ((Smalltalk at: #'ConfigurationOfGLASS') project
-            version: '1.0-beta.9.2') load ]
+            version: '1.0-beta.9.2')
+            repositoryOverrides: self repositoryOverrides;
+            load ]
             on: (Smalltalk at: #'MetacelloSkipDirtyPackageLoad')
             do: [ :ex | ex resume: false ] ]
         ifFalse: [ 
@@ -52,15 +64,52 @@ upgradeGLASS: alternateConfigurationRepositoryDirectoryPathOrNil from: glassVers
             ifTrue: [ 
               "refresh only needed if using alternate repo"
               self refreshGLASSConfigurations: repository ].
-          Gofer new
-            url: 'http://seaside.gemtalksystems.com/ss/metacello';
+          (self
+            goferBlockForUrl: 'http://seaside.gemtalksystems.com/ss/metacello')
+            value
             package: 'ConfigurationOfMetacello';
             load.
           ((Smalltalk at: #'ConfigurationOfMetacello') project
-            version: #'previewBootstrap') load ].
+            version: #'previewBootstrap')
+            repositoryOverrides: self repositoryOverrides;
+            load ].
       self upgradeGofer.
-      ((Smalltalk at: #'ConfigurationOfGLASS') project version: '1.0-beta.9.3')
-        load.
+      (self goferBlockForUrl: 'http://seaside.gemtalksystems.com/ss/metacello')
+        value
+        package: 'ConfigurationOfMetacelloPreview';
+        load.	" explicitly load ConfigurationOfMetacelloPreview"
+      metacelloPreviewStableVersionString := ((Smalltalk
+        at: #'ConfigurationOfMetacelloPreview') project version: #'stable')
+        versionString.
+      metacelloPreviewRepoPath := gsUpgraderCacheDirPath
+        , '/caches/upgradeGLASS/metacelloPreview/metacello-work-'
+        , metacelloPreviewStableVersionString.
+      repositoryOverride
+        ifNil: [ 
+          ((Smalltalk at: #'ConfigurationOfGLASS') project version: '1.0-beta.9.3') load.
+          gsUpgraderCacheDirPath
+            ifNotNil: [ self ifNeededDownloadMetacelloPreviewFor: metacelloPreviewStableVersionString ] ]
+        ifNotNil: [ 
+          "Load MetacelloPreview separately -- repositoryOverrides does not apply to Metacello Preview"
+          ((Smalltalk at: #'ConfigurationOfGLASS') project
+            version: '1.0-beta.9.3')
+            repositoryOverrides: self repositoryOverrides;
+            load:
+                #('Core' 'Monticello' 'Metacello' 'Gofer' 'Release Support' 'OB' 'Metacello Tools' 'Gofer Project Loader').
+          gsUpgraderCacheDirPath
+            ifNil: [ 
+              ((Smalltalk at: #'ConfigurationOfMetacelloPreview') project version: #'stable')
+                load ]
+            ifNotNil: [ 
+              self ifNeededDownloadMetacelloPreviewFor: metacelloPreviewStableVersionString.
+              (Smalltalk at: #'Metacello') new
+                baseline: 'Metacello';
+                repository:
+                    'filetree://' , gsUpgraderCacheDirPath
+                        ,
+                          '/caches/upgradeGLASS/metacelloPreview/metacello-work-'
+                        , metacelloPreviewStableVersionString , '/repository';
+                load: 'batch' ] ].
       #('GsCore' 'GsMonticello' 'GsOB' 'GsMisc')
         do: [ :gsProjectName | 
           "Patch registrations with proper repository"
