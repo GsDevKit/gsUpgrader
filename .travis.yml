@@ -77,6 +77,10 @@ env:
 #  - GS_VERSION=3.1.0.6 UPGRADE_TEST=UPGRADE_GsDevKit
 #  - GS_VERSION=3.2.2 UPGRADE_TEST=UPGRADE_GsDevKit
 
+addons:
+  hosts:
+    - travis.dev
+
 before_script:
   - export BASE="$(pwd)"
   - git clone https://github.com/GsDevKit/GsDevKit_home.git
@@ -88,6 +92,7 @@ before_script:
   - cd $BASE
 
 script:
+  - sudo hostname travis.dev
   - bash installServer
   - bash createClient tode
   - bash createStone travis $GS_VERSION
