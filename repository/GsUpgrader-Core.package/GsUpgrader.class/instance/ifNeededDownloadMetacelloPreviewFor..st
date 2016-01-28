@@ -12,7 +12,15 @@ ifNeededDownloadMetacelloPreviewFor: metacelloPreviewStableVersionString
     , metacelloPreviewStableVersionString , '.zip'.
   pid := (System gemVersionReport at: 'processId') printString.
   zipFileName := '/tmp/gsUpgrader-' , pid , '.zip'.
-  MetacelloPlatform current downloadFile: zipUrl to: zipFileName.	"old version of method --- pre preview"
-  MetacelloPlatform current
-    extractRepositoryFrom: zipFileName
-    to: gsUpgraderCacheDirPath , '/caches/upgradeGLASS/metacelloPreview'
+  (MetacelloPlatform current respondsTo: #'downloadFile:to:')
+    ifTrue: [ 
+      "older version of GemStone"
+      MetacelloPlatform current downloadFile: zipUrl to: zipFileName.
+      MetacelloPlatform current
+        extractRepositoryFrom: zipFileName
+        to: gsUpgraderCacheDirPath , '/caches/upgradeGLASS/metacelloPreview' ]
+    ifFalse: [ 
+      MetacelloPlatform current downloadBasicFile: zipUrl to: zipFileName.
+      MetacelloPlatform current
+        extractRepositoryFrom: zipFileName
+        to: gsUpgraderCacheDirPath , '/caches/upgradeGLASS/metacelloPreview' ]
