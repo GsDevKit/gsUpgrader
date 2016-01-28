@@ -5,7 +5,7 @@ upgradeGLASS: alternateConfigurationRepositoryDirectoryPathOrNil from: glassVers
   self log: 'Upgrading GLASS to 1.0-beta.9.3'.
   self
     deploy: [ 
-      | repository usingAlternate metacelloPreviewStableVersionString metacelloPreviewRepoPath |
+      | repository usingAlternate metacelloPreviewStableVersionString |
       repository := alternateConfigurationRepositoryDirectoryPathOrNil
         ifNotNil: [ 
           "Note that the alternate repository must have a copy of each of the 
@@ -81,9 +81,6 @@ upgradeGLASS: alternateConfigurationRepositoryDirectoryPathOrNil from: glassVers
       metacelloPreviewStableVersionString := ((Smalltalk
         at: #'ConfigurationOfMetacelloPreview') project version: #'stable')
         versionString.
-      metacelloPreviewRepoPath := gsUpgraderCacheDirPath
-        , '/caches/upgradeGLASS/metacelloPreview/metacello-work-'
-        , metacelloPreviewStableVersionString.
       repositoryOverride
         ifNil: [ 
           ((Smalltalk at: #'ConfigurationOfGLASS') project version: '1.0-beta.9.3') load.
