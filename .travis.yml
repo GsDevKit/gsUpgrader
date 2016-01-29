@@ -50,6 +50,7 @@ before_script:
 
 script:
   - sudo hostname travis.dev
+  - bash $GS_HOE/tests/travisCustomize.sh
   - bash installServer
   - bash createClient tode
   - bash createStone travis $GS_VERSION
