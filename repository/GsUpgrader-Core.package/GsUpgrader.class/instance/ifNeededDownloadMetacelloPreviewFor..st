@@ -1,6 +1,6 @@
 private
 ifNeededDownloadMetacelloPreviewFor: metacelloPreviewStableVersionString
-  | path zipUrl pid zipFileName |
+  | path zipUrl pid zipFileName sel |
   path := gsUpgraderCacheDirPath
     , '/caches/upgradeGLASS/metacelloPreview/metacello-work-'
     , metacelloPreviewStableVersionString.
@@ -12,15 +12,16 @@ ifNeededDownloadMetacelloPreviewFor: metacelloPreviewStableVersionString
     , metacelloPreviewStableVersionString , '.zip'.
   pid := (System gemVersionReport at: 'processId') printString.
   zipFileName := '/tmp/gsUpgrader-' , pid , '.zip'.
-  (MetacelloPlatform current respondsTo: #'downloadFile:to:')
+  sel := (MetacelloPlatform current respondsTo: #'downloadFile:to:')
     ifTrue: [ 
-      "older version of GemStone"
-      MetacelloPlatform current downloadFile: zipUrl to: zipFileName.
-      MetacelloPlatform current
-        extractRepositoryFrom: zipFileName
-        to: gsUpgraderCacheDirPath , '/caches/upgradeGLASS/metacelloPreview' ]
-    ifFalse: [ 
-      MetacelloPlatform current downloadBasicFile: zipUrl to: zipFileName.
-      MetacelloPlatform current
-        extractRepositoryFrom: zipFileName
-        to: gsUpgraderCacheDirPath , '/caches/upgradeGLASS/metacelloPreview' ]
+      "older versions of Metacello in base image of older versions of GemStone"
+      #'downloadFile:to:' ]
+    ifFalse: [ #'downloadBasicFile:' ].
+  MetacelloPlatform current
+    perform: sel
+    with:
+      {zipUrl.
+      zipFileName}.	"avoid sentButNotImplemented test errors"
+  MetacelloPlatform current
+    extractRepositoryFrom: zipFileName
+    to: gsUpgraderCacheDirPath , '/caches/upgradeGLASS/metacelloPreview'
