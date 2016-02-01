@@ -16,7 +16,7 @@ ifNeededDownloadMetacelloPreviewFor: metacelloPreviewStableVersionString
     ifTrue: [ 
       "older versions of Metacello in base image of older versions of GemStone"
       #'downloadFile:to:' ]
-    ifFalse: [ #'downloadBasicFile:' ].
+    ifFalse: [ #'downloadBasicFile:to:' ].
   MetacelloPlatform current
     perform: sel
     with:
