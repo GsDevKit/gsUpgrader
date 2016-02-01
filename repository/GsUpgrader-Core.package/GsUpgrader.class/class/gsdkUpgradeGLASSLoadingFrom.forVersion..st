@@ -1,4 +1,4 @@
-GsDevKit_home
+private
 gsdkUpgradeGLASSLoadingFrom: gsUpgraderCacheDirPath forVersion: gemstoneVersion
   "use <repoPath> as repositoryOverrides for loads."
 

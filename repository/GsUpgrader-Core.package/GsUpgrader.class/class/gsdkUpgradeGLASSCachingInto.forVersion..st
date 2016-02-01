@@ -1,4 +1,4 @@
-GsDevKit_home
+private
 gsdkUpgradeGLASSCachingInto: gsUpgraderCacheDirPath forVersion: gemstoneVersion
   "Use <cacheDirectoryPath> as the package cache for upgrade"
 
