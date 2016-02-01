@@ -17,11 +17,7 @@ ifNeededDownloadMetacelloPreviewFor: metacelloPreviewStableVersionString
       "older versions of Metacello in base image of older versions of GemStone"
       #'downloadFile:to:' ]
     ifFalse: [ #'downloadBasicFile:to:' ].
-  MetacelloPlatform current
-    perform: sel
-    with:
-      {zipUrl.
-      zipFileName}.	"avoid sentButNotImplemented test errors"
+  MetacelloPlatform current perform: sel with: zipUrl with: zipFileName.	"avoid sentButNotImplemented test errors"
   MetacelloPlatform current
     extractRepositoryFrom: zipFileName
     to: gsUpgraderCacheDirPath , '/caches/upgradeGLASS/metacelloPreview'
