@@ -4,9 +4,7 @@ gsdkUpgradeGLASSLoadingFrom: gsUpgraderCacheDirPath forVersion: gemstoneVersion
 
   | repo |
   repo := MCDirectoryRepository new
-    directory:
-      (ServerFileDirectory
-        on: gsUpgraderCacheDirPath , self monticelloBaseDir , gemstoneVersion).
+    directory: (self _upgradeGLASSCacheDir: gsUpgraderCacheDirPath).
   self new
     gsUpgraderCacheDirPath: gsUpgraderCacheDirPath;
     repositoryOverride: repo;

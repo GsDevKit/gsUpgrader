@@ -3,8 +3,7 @@ gsdkUpgradeGLASSCachingInto: gsUpgraderCacheDirPath forVersion: gemstoneVersion
   "Use <cacheDirectoryPath> as the package cache for upgrade"
 
   | oldCache newCache cacheDir |
-  cacheDir := ServerFileDirectory
-    on: gsUpgraderCacheDirPath , self monticelloBaseDir , gemstoneVersion.
+  cacheDir := self _upgradeGLASSCacheDir: gsUpgraderCacheDirPath.
   cacheDir assureExistence.
   oldCache := MCCacheRepository default.
   [ 
@@ -13,4 +12,5 @@ gsdkUpgradeGLASSCachingInto: gsUpgraderCacheDirPath forVersion: gemstoneVersion
   self new
     gsUpgraderCacheDirPath: gsUpgraderCacheDirPath;
     upgradeGLASS ]
-    ensure: [ MCCacheRepository setDefault: oldCache ]
+    ensure: [ MCCacheRepository setDefault: oldCache ].
+  self _createCacheSentinel: gsUpgraderCacheDirPath forVersion: gemstoneVersion

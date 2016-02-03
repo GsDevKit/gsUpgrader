@@ -1,3 +1,3 @@
 private
-monticelloBaseDir
+_upgradeGLASSCacheBasePath
   ^ '/caches/upgradeGLASS/monticello/'
