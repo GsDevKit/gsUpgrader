@@ -698,7 +698,7 @@ Transcript
   cr;
   show: '-----Upgrade GLASS caching into ', sysDefaultServer.
 (Smalltalk at: #'GsUpgrader')
-  upgradeGLASSForGsDevKit_home: '${GS_VERSION}'
+  upgradeGLASSForGsDevKit_home'
 %
 
 exit 
@@ -723,7 +723,7 @@ Transcript
   cr;
   show: '-----Upgrade GLASS loading from ', sysDefaultServer.
 (Smalltalk at: #'GsUpgrader')
-  upgradeGLASSForGsDevKit_home: '${GS_VERSION}'
+  upgradeGLASSForGsDevKit_home'
 %
 
 exit 
