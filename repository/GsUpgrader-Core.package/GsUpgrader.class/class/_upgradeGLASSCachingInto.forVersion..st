@@ -1,5 +1,5 @@
 private
-gsdkUpgradeGLASSCachingInto: gsUpgraderCacheDirPath forVersion: gemstoneVersion
+_upgradeGLASSCachingInto: gsUpgraderCacheDirPath forVersion: gemstoneVersion
   "Use <cacheDirectoryPath> as the package cache for upgrade"
 
   | oldCache newCache cacheDir |

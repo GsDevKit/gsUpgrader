@@ -1,5 +1,5 @@
 private
-gsdkUpgradeGLASSLoadingFrom: gsUpgraderCacheDirPath forVersion: gemstoneVersion
+_upgradeGLASSLoadingFrom: gsUpgraderCacheDirPath forVersion: gemstoneVersion
   "use <repoPath> as repositoryOverrides for loads."
 
   | repo |

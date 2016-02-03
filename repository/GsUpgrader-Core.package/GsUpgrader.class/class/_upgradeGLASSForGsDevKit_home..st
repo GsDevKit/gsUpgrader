@@ -1,5 +1,5 @@
-GsDevKit_home
-upgradeGLASSForGsDevKit_home: gemstoneVersion
+private
+_upgradeGLASSForGsDevKit_home: gemstoneVersion
   | sysDefaultServer gsUpgraderCacheDirPath |
   sysDefaultServer := GsFile
     _expandEnvVariable: 'GS_SYS_DEFAULT_SERVER'
@@ -8,9 +8,9 @@ upgradeGLASSForGsDevKit_home: gemstoneVersion
   (self _cacheSentinelExists: gsUpgraderCacheDirPath forVersion: gemstoneVersion)
     ifTrue: [ 
       self
-        gsdkUpgradeGLASSLoadingFrom: gsUpgraderCacheDirPath
+        _upgradeGLASSLoadingFrom: gsUpgraderCacheDirPath
         forVersion: gemstoneVersion ]
     ifFalse: [ 
       self
-        gsdkUpgradeGLASSCachingInto: gsUpgraderCacheDirPath
+        _upgradeGLASSCachingInto: gsUpgraderCacheDirPath
         forVersion: gemstoneVersion ]
