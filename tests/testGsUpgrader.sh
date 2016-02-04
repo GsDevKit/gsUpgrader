@@ -697,8 +697,7 @@ Gofer new
 Transcript
   cr;
   show: '-----Upgrade GLASS caching into ', sysDefaultServer.
-(Smalltalk at: #'GsUpgrader')
-  upgradeGLASSForGsDevKit_home'
+(Smalltalk at: #'GsUpgrader') upgradeGLASSForGsDevKit_home
 %
 
 exit 
@@ -722,8 +721,7 @@ Gofer new
 Transcript
   cr;
   show: '-----Upgrade GLASS loading from ', sysDefaultServer.
-(Smalltalk at: #'GsUpgrader')
-  upgradeGLASSForGsDevKit_home'
+(Smalltalk at: #'GsUpgrader') upgradeGLASSForGsDevKit_home
 %
 
 exit 
