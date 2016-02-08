@@ -24,8 +24,7 @@ TDScriptLeafNode{#name:'deploy',#contents:'[ :topez :objIn :tokens :command :com
           opts
             at: \'dir\'
             ifPresent: [ :directoryPathOrReference | 
-              (directoryPathOrReference
-                beginsWith: \'@\')
+              (directoryPathOrReference beginsWith: \'@\')
                 ifTrue: [ 
                   | serverDir |
                   serverDir := mcTool
@@ -47,6 +46,17 @@ SYNOPSIS
 DESCRIPTION
   Copy the loaded package of GsUpgrader-Core to the <dest-repo>.
 
+  Use the following to deploy the gsUpgrader package to the monticello
+  directory for testing with travis-ci:
+
+    ./deploy --dir=@/sys/stone/dirs/GsUpgrader/monticello
+
+  Use the following to deploy the gsUpgrade to deploy the gsUpgrader
+  package into production at http://ss3.gemtalksystems.com/ss/gsUpgrader: 
+
+    ./deploy --repo=http://ss3.gemtalksystems.com/ss/gsUpgrader
+
+
 EXAMPLES
   ./deploy --help
   ./deploy --repo=server:///opt/git/gsUpgrader/monticello
@@ -55,4 +65,4 @@ EXAMPLES
   ./deploy --dir=@/sys/stone/dirs/GsUpgrader/monticello
   ./deploy --dir=/opt/git/GsUpgrader/monticello
 \'
-        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2015-10-07T12:05:22.98613691329956-07:00']}
+        topez: topez ] ]',#creationTime:DateAndTime['2014-09-10T15:06:57.9819889068603-07:00'],#modificationTime:DateAndTime['2016-02-08T09:58:02.4221498966217-08:00']}

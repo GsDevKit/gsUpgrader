@@ -35,6 +35,31 @@ If you have locked one of the projects and the repository does not match the def
 | Grease  | github://GsDevKit/Grease:master/repository |
 | Metacello | github://dalehenrich/metacello-work:master/repository |
 
+##GsUpgrader Developement
+To load into a tODE image for development:
+
+```
+project install --https --local --url=http://gsdevkit.github.io/GsDevKit_home/GsUpgrader.ston
+project load GsUpgrader
+```
+
+When you are ready to test your version of the package on travis-ci, copy the mcz file to the monticello directory for the project, commit, and push your changes to GitHub:
+
+```
+/home/gsUpgrader/deploy --dir=@/sys/stone/dirs/GsUpgrader/monticello
+project commit --git --message=`test my changes` GsUpgrader
+project push --remote=myForkRemoteName GsUpgrader
+```
+
+Once the tests have passed and you are ready to deploy to SS3:
+
+```
+/home/gsUpgrade/deploy --repo=http://ss3.gemtalksystems.com/ss/gsUpgrader
+```
+
+Note: `http://ss3.gemtalksystems.com/ss/gsUpgrader` requires a valid user name and password.
+
+
 ---
 
 ---
@@ -196,4 +221,3 @@ Utf8Encoding.230-DaleHenrichs.23
 ```
 
 ---
-

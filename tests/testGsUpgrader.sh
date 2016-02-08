@@ -1,22 +1,19 @@
 #!/bin/bash -x
 
-set -e # exit on error
-
-cd ${GS_HOME}/gemstone/stones/travis
-. defStone.env
+set -ex # exit on error
 
 # UPGRADE_TEST : ALL_UPGRADE, 
 #                TEST_FILETREE, TEST_GLASS1, TEST_GREASE, TEST_GREASE_GLASS1, TEST_SEASIDE31X, TEST_ZINC_2XX, 
-#                UPGRADE_GLASS, UPGRADE_GLASS1, UPGRADE_GLASS1_GsDevKit, UPGRADE_GsDevKit, UPGRADE_METACELLO 
+#                UPGRADE_GLASS, UPGRADE_GLASS1, UPGRADE_GLASS1_GsDevKit, UPGRADE_GsDevKit, UPGRADE_METACELLO, UPGRADE_GsDevKit_home_GLASS
 
 case "${UPGRADE_TEST}" in
 	"ALL_UPGRADE")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS, upgradeMetacello, upgradeGrease, upgradeGLASS1, upgradeGLASS, upgradeMetacello, upgradeGrease, upgradeGLASS1, upgradeGsDevKit"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 login
@@ -57,12 +54,12 @@ EOF
 		stopStone travis
 		;;
 	"TEST_FILETREE")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeMetacello install and run FileTree tests"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 set user SystemUser p swordfish
@@ -117,12 +114,12 @@ EOF
 		stopStone travis
 		;;
 	"TEST_ISSUE_3")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: Issue #3"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 login
@@ -154,12 +151,12 @@ EOF
 		stopStone travis
 		;;
 	"TEST_GLASS1")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS1 and run tests"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 set user SystemUser p swordfish
@@ -213,12 +210,12 @@ EOF
 		;;
 	"TEST_GREASE")
 		# NOTE - the tests for GREASE do not pass without loading GLASS1
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: install and run Grease tests"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 set user SystemUser p swordfish
@@ -268,12 +265,12 @@ EOF
 		stopStone travis
 		;;
 	"TEST_GREASE_GLASS1")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS1 and install and run Grease tests"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 set user SystemUser p swordfish
@@ -329,12 +326,12 @@ EOF
 		stopStone travis
 		;;
 	"TEST_GSDEVKIT")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGsDevKit and run tests"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 set user SystemUser p swordfish
@@ -387,12 +384,12 @@ EOF
 		stopStone travis
 		;;
 	"TEST_SEASIDE31X")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: Seaside3.1.x and run tests"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 set user SystemUser p swordfish
@@ -447,12 +444,12 @@ EOF
 		stopStone travis
 		;;
 	"TEST_ZINC_2XX")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: Zinc2.x.x and run tests"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 set user SystemUser p swordfish
@@ -507,12 +504,12 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GLASS")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 login
@@ -530,13 +527,14 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GLASS1")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS1"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
+iferr 2 stack
 iferr 3 exit 1
 login
 run
@@ -553,12 +551,12 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GLASS1_GsDevKit")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGLASS1 then upgradeGsDevKit"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 login
@@ -577,12 +575,12 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GREASE")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGrease"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 login
@@ -600,12 +598,12 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GREASE_GLASS1")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGrease then upgradeGLASS1"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 login
@@ -627,12 +625,12 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_GsDevKit")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeGsDevKit"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 login
@@ -653,12 +651,12 @@ EOF
 		stopStone travis
 		;;
 	"UPGRADE_METACELLO")
-		stoneNewExtent travis
+		newExtent travis
 		startStone travis
 		echo "=================================="
 		echo "TESTING: upgradeMetacello"
 		echo "=================================="
-		topaz -l -q -T50000 <<EOF
+		startTopaz travis -l -q -T50000 <<EOF
 iferr 1 stk
 iferr 3 exit 1
 login
@@ -672,6 +670,61 @@ Gofer new
 %
 
 exit
+EOF
+		stopStone travis
+		;;
+	"UPGRADE_GsDevKit_home_GLASS")
+		newExtent travis
+		startStone travis
+		echo "=================================="
+		echo "TESTING: UPGRADE_GsDevKit_home_GLASS"
+		echo "=================================="
+		startTopaz travis -l -q -T50000 <<EOF
+iferr 1 stk
+iferr 2 stack
+iferr 3 exit 1
+login
+run
+| sysDefaultServer |
+sysDefaultServer := (GsFile
+  _expandEnvVariable: 'GS_HOME'
+  isClient: false), '/sys/default/server'.
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
+Transcript
+  cr;
+  show: '-----Upgrade GLASS caching into ', sysDefaultServer.
+(Smalltalk at: #'GsUpgrader') upgradeGLASSForGsDevKit_home
+%
+
+exit 
+EOF
+		newExtent travis
+		startTopaz travis -l -q -T50000 <<EOF
+iferr 1 stk
+iferr 2 stack
+iferr 3 exit 1
+login
+run
+| sysDefaultServer |
+sysDefaultServer := (GsFile
+  _expandEnvVariable: 'GS_HOME'
+  isClient: false), '/sys/default/server'.
+Gofer new
+  package: 'GsUpgrader-Core';
+  repository: (MCDirectoryRepository new 
+                 directory: (ServerFileDirectory on: '${BASE}/monticello'));
+  load.
+Transcript
+  cr;
+  show: '-----Upgrade GLASS loading from ', sysDefaultServer.
+(Smalltalk at: #'GsUpgrader') upgradeGLASSForGsDevKit_home
+%
+
+exit 
 EOF
 		stopStone travis
 		;;

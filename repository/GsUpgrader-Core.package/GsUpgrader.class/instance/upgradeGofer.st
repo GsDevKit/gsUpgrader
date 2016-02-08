@@ -6,12 +6,15 @@ upgradeGofer
 
   self log: 'Upgrading Gofer to #stable'.
   [ 
-  Gofer new
-    url: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository';
+  (self
+    goferBlockForUrl: 'http://seaside.gemtalksystems.com/ss/MetacelloRepository')
+    value
     package: 'ConfigurationOfGofer';
     load ]
     on: Warning
     do: [ :ex | 
       self log: ex description.
       ex resume ].
-  ((Smalltalk at: #'ConfigurationOfGofer') project version: #'stable') load
+  ((Smalltalk at: #'ConfigurationOfGofer') project version: #'stable')
+    repositoryOverrides: self repositoryOverrides;
+    load
