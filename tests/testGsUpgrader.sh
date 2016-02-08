@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-set -ex` # exit on error
+set -ex # exit on error
 
 # UPGRADE_TEST : ALL_UPGRADE, 
 #                TEST_FILETREE, TEST_GLASS1, TEST_GREASE, TEST_GREASE_GLASS1, TEST_SEASIDE31X, TEST_ZINC_2XX, 
